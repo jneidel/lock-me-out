@@ -17,7 +17,7 @@
     "!win32"
   ],
   "scripts": {
-    "start": "nodemon src/app.js --ignore dist/ --ignore test/ --trace-sync-io",
+    "start": "nodemon dist/app.js --ignore src/ --ignore test/ --trace-sync-io",
     "build": "npm run build-ts && npm run build-webpack",
     "test": "ava",
     "watch": "concurrently -k -n \"🔨,📦,🚀\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run watch-test\" --prefix name",
@@ -36,29 +36,35 @@
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "connect-flash": "^0.1.1",
-    "connect-mongo": "^2.0.3",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
     "lock-me-out-api": "^0.1.0",
-    "mongoose": "^5.2.8",
-    "mongoose-mongodb-errors": "0.0.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "validator": "^10.8.0"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/compression": "0.0.36",
+    "@types/connect-flash": "0.0.34",
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.0",
+    "@types/express-session": "^1.15.11",
+    "@types/helmet": "0.0.42",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^10.12.18",
+    "@types/passport": "^1.0.0",
     "ava": "^1.1.0",
     "concurrently": "^4.0.1",
     "mockery": "^2.1.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "setup-webpack": "^2.3.2",
-    "sinon": "^7.0.0",
-    "sinon-mongoose": "^2.2.1"
+    "sinon": "^7.0.0"
   },
   "ava": {
     "files": [

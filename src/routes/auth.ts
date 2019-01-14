@@ -1,11 +1,11 @@
-const express = require( "express" );
-const router = express.Router();
-const passport = require( "passport" );
-const User = require( "../models/User" );
+import { Router } from "express";
+const router = Router();
+// const passport = require( "passport" );
+// const User = require( "../models/User" );
 
 router.get( "/register", ( req, res ) => res.render( "register" ) );
 
-router.post( "/register", async ( req, res, next ) => {
+/* router.post( "/register", async ( req, res, next ) => {
   const username = req.body.username;
 
   const user = await User.findOne( { username } );
@@ -17,17 +17,18 @@ router.post( "/register", async ( req, res, next ) => {
       .then( r => res.send( "Successful Register" ) )
       .catch( err => res.send( "Error" ) );
   }
-} );
+} ); */
 
 router.get( "/login", ( req, res ) => res.render( "login", { user: req.user } ) );
 
-router.post( "/login", passport.authenticate( "local" ), ( req, res ) => {
+/* router.post( "/login", passport.authenticate( "local" ), ( req, res ) => {
   res.send( "Successful Login!" );
 } );
 
 router.get( "/logout", ( req, res ) => {
   req.logout();
   res.redirect( "/" );
-} );
+} ); */
 
-module.exports = router;
+export default router;
+
