@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta( charset="UTF-8" )
+    title= `${title} | lock-me-out`
+    link( rel="shortcut icon" type="image/ico" href="favicon.ico" )
+    link( href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet")
+    block styles
+
+  body
+    #content
+      block flashes
+        if locals.flashes
+          - const categories = Object.keys(locals.flashes)
+            each category in categories
+              each message in flashes[category]
+                .flash( class=`-${category}` onClick="this.remove()" )
+                  p.flash__text!= message
+      #inner
+        block content
+
+    block scripts
+
+    style.
+      html {
+        box-sizing: border-box;
+      }
+      *:not( img ), *:before, *:after {
+        box-sizing: inherit;
+      }

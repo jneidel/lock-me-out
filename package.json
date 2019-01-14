@@ -1,0 +1,69 @@
+{
+  "name": "lock-me-out",
+  "version": "0.0.0",
+  "description": "Temporarily lock yourself out, by encrypting e.g. your netflix password for a week",
+  "repository": "jneidel/lock-me-out",
+  "license": "MIT",
+  "author": {
+    "name": "Jonathan Neidel",
+    "email": "git@jneidel.com",
+    "url": "https://jneidel.com"
+  },
+  "main": "src/app.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "os": [
+    "!win32"
+  ],
+  "scripts": {
+    "start": "nodemon src/app.js --ignore dist/ --ignore test/ --trace-sync-io",
+    "build": "npm run build-ts && npm run build-webpack",
+    "test": "ava",
+    "watch": "concurrently -k -n \"🔨,📦,🚀\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run watch-test\" --prefix name",
+    "build-ts": "tsc",
+    "build-webpack": "webpack",
+    "watch-ts": "tsc -w",
+    "watch-webpack": "webpack -w",
+    "watch-test": "nodemon --exec 'ava'",
+    "test-unit": "nodemon --exec 'ava ./test/unit/*.test.js' --ignore dist/",
+    "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.2",
+    "better-sqlite3": "^5.3.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "helmet": "^3.14.0",
+    "jsonwebtoken": "^8.3.0",
+    "lock-me-out-api": "^0.1.0",
+    "mongoose": "^5.2.8",
+    "mongoose-mongodb-errors": "0.0.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3",
+    "validator": "^10.8.0"
+  },
+  "devDependencies": {
+    "ava": "^1.1.0",
+    "concurrently": "^4.0.1",
+    "mockery": "^2.1.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4",
+    "setup-webpack": "^2.3.2",
+    "sinon": "^7.0.0",
+    "sinon-mongoose": "^2.2.1"
+  },
+  "ava": {
+    "files": [
+      "test/*.test.js",
+      "test/**/*.test.js"
+    ]
+  }
+}

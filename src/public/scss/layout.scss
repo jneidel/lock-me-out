@@ -1,0 +1,42 @@
+@import "_vars.scss";
+
+html {
+  font-size: $fs-text;
+  font-family: $f-text;
+  color: $black;
+}
+
+h1 {
+  font-size: $fs-headline;
+  font-family: $f-headline;
+}
+
+// Flashes
+.flash {
+	font-size: 1.25rem;
+  background: rgba( $black, 0.25 );
+	padding: 4px 8px 4px 6px;
+	margin: 5px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba( $black, 0.15 );
+  }
+  &:last-of-type {
+    margin-bottom: 10px;
+  }
+  &.-success {
+    border-left: 4px solid $yellow;
+  }
+  &.-error {
+    border-left: 4px solid $red;
+  }
+  &.-info {
+    border-left: 4px solid $white;
+  }
+  &__text {
+    margin: 0;
+  }
+}
