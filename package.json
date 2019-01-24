@@ -41,7 +41,7 @@
     "express-session": "^1.15.6",
     "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
-    "lock-me-out-api": "^0.1.0",
+    "lock-me-out-api": "file:../lock-me-out-api",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
