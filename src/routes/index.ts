@@ -1,7 +1,20 @@
-import { Router, Request, Response } from "express";
-const router = Router();
+import viewRoutes from "./view";
+import apiRoutes from "./api";
+import authRoutes from "./auth";
+import * as errorRoutes from "./error";
 
-router.get( "/", ( req: Request, res: Response ) => res.render( "welcome", { title: "lock-me-out" } ) );
+export default ( app, ENVIRONMENT: string ) => {
+  app.use( "/", viewRoutes );
+  app.use( "/api", apiRoutes );
+  app.use( "/", authRoutes );
 
-export default router;
+  app.use( errorRoutes.notFound );
+  app.use( errorRoutes.flashValidationErrors );
+
+  if ( ENVIRONMENT === "production" ) {
+    app.use( errorRoutes.productionErrors );
+  } else {
+    app.use( errorRoutes.developmentErrors );
+  }
+}
 

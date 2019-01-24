@@ -8,6 +8,7 @@ import * as path from "path";
 // import * as passport from "passport";
 import httpLogger from "./util/http-logger";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
+import mountRoutes from "./routes/index";
 
 const app = initiateExpress();
 
@@ -37,30 +38,14 @@ app.use( ( req, res, next ) => {
   return next();
 } );
 
+mountRoutes( app, ENVIRONMENT )
+
 /* app.use( passport.initialize() );
 app.use( passport.session() );
 require( "./models/passport" ); */
 
 if ( ENVIRONMENT !== "production" ) {
   app.use( httpLogger );
-}
-
-import baseRoutes from "./routes";
-import apiRoutes from "./routes/api";
-import authRoutes from "./routes/auth";
-import * as errorRoutes from "./routes/errors";
-
-app.use( "/", baseRoutes );
-app.use( "/api", apiRoutes );
-app.use( "/", authRoutes );
-
-app.use( errorRoutes.notFound );
-app.use( errorRoutes.flashValidationErrors );
-
-if ( ENVIRONMENT === "production" ) {
-  app.use( errorRoutes.productionErrors );
-} else {
-  app.use( errorRoutes.developmentErrors );
 }
 
 app.listen( PORT, () => {

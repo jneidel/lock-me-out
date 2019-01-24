@@ -38,3 +38,12 @@ export const productionErrors = ( err, req, res, next ) => {
   } );
 };
 
+
+// generic error handler middleware
+// transform any plain/text errors into json
+app.use((err, req, res, next) => {
+  console.log(err.stack); // log the error
+  res.status(500).json({
+    error: err.message // respond with JSON error
+  });
+});
