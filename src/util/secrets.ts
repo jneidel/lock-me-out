@@ -21,9 +21,8 @@ if ( !process.env.MONGODB_URI ) {
 
 const MONGODB_URI: string = process.env.MONGODB_URI;
 */
-const ENVIRONMENT: string = process.env.NODE_ENV || "development";
-const SESSION_SECRET: string = process.env.SESSION_SECRET || "5519888571";
-const PORT: number = Number( process.env.PORT ) || 8000;
-
-export { ENVIRONMENT, SESSION_SECRET, PORT };
+export const ENVIRONMENT: string = process.env.NODE_ENV || "development";
+export const SESSION_SECRET: string = process.env.SESSION_SECRET || "5519888571";
+export const PORT: number = Number( process.env.PORT ) || 8000;
+export const DEFAULT_KEYID: string = process.env.DEFAULT_KEYID || "B29E6A7A7DFD16FA";
 

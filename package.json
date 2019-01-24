@@ -25,7 +25,7 @@
     "build-webpack": "webpack",
     "watch-ts": "tsc -w",
     "watch-webpack": "webpack -w",
-    "watch-test": "nodemon --exec 'ava'",
+    "watch-test": "ava -w",
     "test-unit": "nodemon --exec 'ava ./test/unit/*.test.js' --ignore dist/",
     "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env"
   },
@@ -45,6 +45,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
+    "uuid": "^3.3.2",
     "validator": "^10.8.0"
   },
   "devDependencies": {
@@ -71,15 +72,15 @@
   },
   "ava": {
     "files": [
-      "test/*.test.js",
-      "test/**/*.test.js"
+      "test/**/*.test.*",
+      "test/**/**/*.test.*"
     ],
     "compileEnhancements": false,
     "extensions": [
       "ts"
     ],
     "require": [
-      "ts-node/register"
+      "ts-node/register/transpile-only"
     ]
   }
 }
