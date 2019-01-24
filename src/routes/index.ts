@@ -16,5 +16,5 @@ export default ( app, ENVIRONMENT: string ) => {
   } else {
     app.use( errorRoutes.developmentErrors );
   }
-}
+};
 
