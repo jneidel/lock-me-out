@@ -1,4 +1,4 @@
-export default [
+const reservedUsernames = new Set( [
   "0",
   "about",
   "access",
@@ -600,4 +600,9 @@ export default [
   "yourname",
   "yoursite",
   "yourusername",
-];
+] );
+
+export default function inReservedUsernames( name ) {
+  return reservedUsernames.has( name )
+}
+
