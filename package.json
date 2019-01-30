@@ -18,21 +18,20 @@
   ],
   "scripts": {
     "start": "nodemon dist/app.js --ignore src/ --ignore test/ --trace-sync-io",
+    "test": "jest",
     "build": "npm run build-ts && npm run build-webpack",
-    "test": "ava",
-    "watch": "concurrently -k -n \"🔨,📦,🚀\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run watch-test\" --prefix name",
     "build-ts": "tsc",
     "build-webpack": "webpack",
+    "watch": "concurrently -k -n \"🔨,📦,🚀\" \"npm run watch-ts\" \"npm run watch-webpack\" \"npm run watch-test\" --prefix name",
     "watch-ts": "tsc -w",
     "watch-webpack": "webpack -w",
-    "watch-test": "ava -w",
-    "test-unit": "nodemon --exec 'ava ./test/unit/*.test.js' --ignore dist/",
+    "watch-test": "jest --watch",
+    "watch-unit": "jest --watch test/unit/**/*.test.ts",
     "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.2",
-    "better-sqlite3": "^5.3.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "connect-flash": "^0.1.1",
@@ -42,9 +41,11 @@
     "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
     "lock-me-out-api": "file:../lock-me-out-api",
+    "mysql2": "^1.6.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
+    "sequelize": "^4.42.0",
     "uuid": "^3.3.2",
     "validator": "^10.8.0"
   },
@@ -56,31 +57,26 @@
     "@types/express": "^4.16.0",
     "@types/express-session": "^1.15.11",
     "@types/helmet": "0.0.42",
+    "@types/jest": "^23.3.13",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.18",
     "@types/passport": "^1.0.0",
-    "ava": "^1.1.0",
     "concurrently": "^4.0.1",
-    "mockery": "^2.1.0",
+    "jest": "^24.0.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "setup-webpack": "^2.3.2",
-    "sinon": "^7.0.0",
     "supertest": "^3.4.2",
+    "ts-jest": "^23.10.5",
     "ts-node": "^8.0.1",
     "typescript": "^3.2.4"
   },
-  "ava": {
-    "files": [
-      "test/**/*.test.*",
-      "test/**/**/*.test.*"
+  "jest": {
+    "testMatch": [
+      "**/?*.test.ts"
     ],
-    "compileEnhancements": false,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register/transpile-only"
-    ]
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
   }
 }
