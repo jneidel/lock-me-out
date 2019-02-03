@@ -1,5 +1,3 @@
-import logger from "morgan";
-
 const patternShort = ":status :method :url - :response-time ms";
 
 const filterResources = ( req: any ) => {
@@ -11,7 +9,9 @@ const filterResources = ( req: any ) => {
   return true;
 };
 
-export default logger( patternShort, { // Log requests to console
-  skip: filterResources,
-} );
+export default function mountLogger( app, ENVIRONMENT ) {
+  // Log development requests to console
+  if ( ENVIRONMENT !== "production" )
+    app.use( require( "morgan" )( patternShort, { skip: filterResources } ) );
+}
 

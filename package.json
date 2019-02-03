@@ -27,7 +27,8 @@
     "watch-webpack": "webpack -w",
     "watch-test": "jest --watch",
     "watch-unit": "jest --watch test/unit/**/*.test.ts",
-    "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env"
+    "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env",
+    "lint": "eslint --fix --ext .ts --parser-options \"{ 'ecmaVersion': 10, 'ecmaFeatures': { 'impliedStrict': true }, project: ./tsconfig.json }\" src"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -46,8 +47,7 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "sequelize": "^4.42.0",
-    "uuid": "^3.3.2",
-    "validator": "^10.8.0"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",

@@ -5,9 +5,9 @@ import compression from "compression";
 import session from "express-session";
 import flash from "connect-flash";
 import * as path from "path";
-// import * as passport from "passport";
-import httpLogger from "./util/http-logger";
+// Import * as passport from "passport";
 import mountRoutes from "./routes";
+import mountLogger from "./util/http-logger";
 import db from "./db";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
@@ -31,7 +31,7 @@ app.use( session( {
     httpOnly: true,
     secure  : true,
   },
-  // store: new MongoStore( { mongooseConnection: mongoose.connection } ),
+  // Store: new MongoStore( { mongooseConnection: mongoose.connection } ),
 } ) );
 app.use( flash() );
 app.use( ( req, res, next ) => {
@@ -39,18 +39,15 @@ app.use( ( req, res, next ) => {
   return next();
 } );
 
-mountRoutes( app, ENVIRONMENT )
+mountRoutes( app, ENVIRONMENT );
+mountLogger( app, ENVIRONMENT );
 
-/* app.use( passport.initialize() );
+/* App.use( passport.initialize() );
 app.use( passport.session() );
 require( "./models/passport" ); */
 
-if ( ENVIRONMENT !== "production" ) {
-  app.use( httpLogger );
-}
-
 db.sync().then( () => {
-  console.log( "Connected to mysql" )
+  console.log( "Connected to mysql" );
 
   app.listen( PORT, () => {
     console.log( `Server running on port ${PORT}` );
@@ -59,5 +56,5 @@ db.sync().then( () => {
   console.error( "There was an error connecting to mysql. Please check your '.env' file." );
   console.error( err );
   process.exit();
-})
+} );
 

@@ -2,7 +2,7 @@ import uuid from "uuid/v4";
 import reservedUsernames from "./reserved-usernames";
 import { DEFAULT_KEYID } from "../../util/secrets";
 
-export default function createItem( sequelize, DataTypes ) {
+export default function createItem( sequelize, DataTypes ): {} {
   return sequelize.define( "User", {
     id: {
       type        : DataTypes.STRING,

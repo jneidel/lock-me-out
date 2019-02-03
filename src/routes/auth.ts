@@ -1,11 +1,11 @@
 import { Router } from "express";
 const router = Router();
-// const passport = require( "passport" );
+// Const passport = require( "passport" );
 // const User = require( "../models/User" );
 
 router.get( "/register", ( req, res ) => res.render( "register" ) );
 
-/* router.post( "/register", async ( req, res, next ) => {
+/* Router.post( "/register", async ( req, res, next ) => {
   const username = req.body.username;
 
   const user = await User.findOne( { username } );
@@ -21,7 +21,7 @@ router.get( "/register", ( req, res ) => res.render( "register" ) );
 
 router.get( "/login", ( req, res ) => res.render( "login", { user: req.user } ) );
 
-/* router.post( "/login", passport.authenticate( "local" ), ( req, res ) => {
+/* Router.post( "/login", passport.authenticate( "local" ), ( req, res ) => {
   res.send( "Successful Login!" );
 } );
 

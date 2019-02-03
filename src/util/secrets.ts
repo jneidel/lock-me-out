@@ -9,16 +9,15 @@ if ( existsSync( ".env" ) ) {
   dotenv( { path: ".env.example" } ); // Fallback if no own .env file exists
 }
 
-[ // Variables require values
-  { var: "DEFAULT_KEYID", msg: "default keyid" },
+// Variables require values
+[ { var: "DEFAULT_KEYID", msg: "default keyid" },
   { var: "MYSQL_USER", msg: "mysql username" },
-  { var: "MYSQL_PASS", msg: "mysql password for the corresponding user" },
-].forEach( x => {
+  { var: "MYSQL_PASS", msg: "mysql password for the corresponding user" } ].forEach( x => {
   if ( !process.env[x.var] ) {
     console.error( `No ${x.msg} given. Set ${x.var} environment variable.` );
     process.exit();
   }
-})
+} );
 
 export const ENVIRONMENT: string = process.env.NODE_ENV || "development";
 export const SESSION_SECRET: string = process.env.SESSION_SECRET || "5519888571";

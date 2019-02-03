@@ -11,10 +11,9 @@ export default ( app, ENVIRONMENT: string ) => {
   app.use( errorRoutes.notFound );
   app.use( errorRoutes.flashValidationErrors );
 
-  if ( ENVIRONMENT === "production" ) {
+  if ( ENVIRONMENT === "production" )
     app.use( errorRoutes.productionErrors );
-  } else {
+  else
     app.use( errorRoutes.developmentErrors );
-  }
 };
 
