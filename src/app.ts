@@ -7,8 +7,9 @@ import flash from "connect-flash";
 import * as path from "path";
 // import * as passport from "passport";
 import httpLogger from "./util/http-logger";
+import mountRoutes from "./routes";
+import db from "./db";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
-import mountRoutes from "./routes/index";
 
 const app = initiateExpress();
 
@@ -48,7 +49,15 @@ if ( ENVIRONMENT !== "production" ) {
   app.use( httpLogger );
 }
 
-app.listen( PORT, () => {
-  console.log( `Server running on port ${PORT}` );
-} );
+db.sync().then( () => {
+  console.log( "Connected to mysql" )
+
+  app.listen( PORT, () => {
+    console.log( `Server running on port ${PORT}` );
+  } );
+} ).catch( err => {
+  console.error( "There was an error connecting to mysql. Please check your '.env' file." );
+  console.error( err );
+  process.exit();
+})
 
