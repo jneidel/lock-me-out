@@ -15,7 +15,7 @@ if ( existsSync( ".env" ) ) {
   { var: "MYSQL_PASS", msg: "mysql password for the corresponding user" },
 ].forEach( x => {
   if ( !process.env[x.var] ) {
-    throw new Error( `No ${x.msg} given. Set ${x.var} environment variable.` );
+    console.error( `No ${x.msg} given. Set ${x.var} environment variable.` );
     process.exit();
   }
 })
