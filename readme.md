@@ -27,6 +27,14 @@
 $ npm run test
 ```
 
+## Attribution
+
+**Fonts**
+
+- [Lato](https://fonts.google.com/specimen/Lato)
+- [Open Sans](https://fonts.google.com/specimen/Open+Sans)
+- [Quantify](https://www.dafont.com/quantify.font)
+
 ## License
 
 MIT © [Jonathan Neidel](https://jneidel.com)
