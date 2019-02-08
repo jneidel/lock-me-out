@@ -28,7 +28,9 @@
     "watch-test": "jest --watch",
     "watch-unit": "jest --watch test/unit/**/*.test.ts",
     "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env",
-    "lint": "eslint --fix --ext .ts --parser-options \"{ 'ecmaVersion': 10, 'ecmaFeatures': { 'impliedStrict': true }, project: ./tsconfig.json }\" src"
+    "lint": "npm run lint-ts && npm run lint-js",
+    "lint-ts": "eslint --fix -c ~/.eslintrc-ts --ext .ts --parser-options \"{ 'ecmaVersion': 10, 'ecmaFeatures': { 'impliedStrict': true }, project: ./tsconfig.json }\" src",
+    "lint-js": "eslint --fix --ext .js src/public"
   },
   "dependencies": {
     "axios": "^0.18.0",
