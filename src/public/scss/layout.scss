@@ -27,6 +27,10 @@ h1 {
   font-family: $f-headline;
 }
 
+#content {
+  grid-area: main;
+}
+
 /*
   Header
 

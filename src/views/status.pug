@@ -4,7 +4,10 @@ block styles
   link( rel="stylesheet" type="text/css" href="css/status.css" )
 
 block content
-  h1 status
+  h1 Locked item status
+  label( for="status" ) Get the status of an encrypted item by entering it's code:
+  input( type="text" name="status" value=`${defaultValue}` )
+  button Get Status
 
 block scripts
-  script( src="js/welcome.js" )
+  script( src="js/status.js" )
