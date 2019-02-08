@@ -5,7 +5,6 @@ import compression from "compression";
 import session from "express-session";
 import flash from "connect-flash";
 import * as path from "path";
-// Import * as passport from "passport";
 import mountRoutes from "./routes";
 import mountLogger from "./util/http-logger";
 import db from "./db";
@@ -31,7 +30,6 @@ app.use( session( {
     httpOnly: true,
     secure  : true,
   },
-  // Store: new MongoStore( { mongooseConnection: mongoose.connection } ),
 } ) );
 app.use( flash() );
 app.use( ( req, res, next ) => {
@@ -41,10 +39,6 @@ app.use( ( req, res, next ) => {
 
 mountRoutes( app, ENVIRONMENT );
 mountLogger( app, ENVIRONMENT );
-
-/* App.use( passport.initialize() );
-app.use( passport.session() );
-require( "./models/passport" ); */
 
 db.sync().then( () => {
   console.log( "Connected to mysql" );

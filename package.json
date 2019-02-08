@@ -45,8 +45,6 @@
     "jsonwebtoken": "^8.3.0",
     "lock-me-out-api": "file:../lock-me-out-api",
     "mysql2": "^1.6.4",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "sequelize": "^4.42.0",
     "uuid": "^3.3.2"
@@ -62,7 +60,6 @@
     "@types/jest": "^23.3.13",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.18",
-    "@types/passport": "^1.0.0",
     "concurrently": "^4.0.1",
     "jest": "^24.0.0",
     "morgan": "^1.9.1",
