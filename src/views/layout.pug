@@ -8,6 +8,29 @@ html
     block styles
 
   body
+    #header
+      block header
+        #nav-left
+          a.header-link-home( href="/" )
+            p#logo LMO
+        #nav-right
+          p User
+          //if username
+            - if ( username.length > 20 ) { username = username.slice( 0, 20 ); }
+            .nav-container
+              a.nav-username( href="account" )=username
+              .header-underline
+            .nav-container
+              a( href="logout" )
+                img.logout-icon( src="img/logout.svg" )
+          //else
+            .nav-container#nav-link-register
+              a.header-link-register( href="register" ) Register
+              .header-underline
+            .nav-container
+              a.header-link-login( href="login" ) Login
+              .header-underline
+
     #content
       block flashes
         if locals.flashes
