@@ -1,15 +1,13 @@
 const path = require( "path" );
-const { genScss, babel, browserSync, polyfill, img } = require( "setup-webpack" );
+const { genScss, babel, polyfill, img } = require( "setup-webpack" );
 
 require( "dotenv" ).config( { path: "vars.env" } );
 
 const prod = process.env.NODE_ENV === "prododuction";
 
-const sync = browserSync( 8000, 8080 );
-
 const config = [];
 
-[ "welcome" ].forEach( ( name ) => {
+[ "welcome", "status", "new" ].forEach( ( name ) => {
   const scss = genScss( `../css/${name}.css` );
   const entryPath = `./src/public/bundles/${name}.bundle.js`;
 
@@ -26,7 +24,7 @@ const config = [];
     module : { rules },
     plugins: prod ?
       [ scss.plugin ] :
-      [ scss.plugin, sync ],
+      [ scss.plugin ],
     optimization: {
       minimize : true,
       minimizer: [ scss.minimizer ],
