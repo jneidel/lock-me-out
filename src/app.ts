@@ -40,7 +40,7 @@ app.use( ( req, res, next ) => {
 mountRoutes( app, ENVIRONMENT );
 mountLogger( app, ENVIRONMENT );
 
-db.sync().then( () => {
+db.sync( { logging: false } ).then( () => {
   console.log( "Connected to mysql" );
 
   app.listen( PORT, () => {
