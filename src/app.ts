@@ -7,7 +7,7 @@ import flash from "connect-flash";
 import * as path from "path";
 import mountRoutes from "./routes";
 import mountLogger from "./util/http-logger";
-import db from "./db";
+import initializeDatabase from "./db";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
 const app = initiateExpress();
@@ -40,15 +40,9 @@ app.use( ( req, res, next ) => {
 mountRoutes( app, ENVIRONMENT );
 mountLogger( app, ENVIRONMENT );
 
-db.sync( { logging: false } ).then( () => {
-  console.log( "Connected to mysql" );
-
+initializeDatabase( () => {
   app.listen( PORT, () => {
     console.log( `Server running on port ${PORT}` );
   } );
-} ).catch( err => {
-  console.error( "There was an error connecting to mysql. Please check your '.env' file." );
-  console.error( err );
-  process.exit();
 } );
 

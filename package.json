@@ -44,6 +44,8 @@
     "helmet": "^3.14.0",
     "jsonwebtoken": "^8.3.0",
     "lock-me-out-api": "file:../lock-me-out-api",
+    "mongoose": "^5.4.13",
+    "mongoose-mongodb-errors": "0.0.2",
     "mysql2": "^1.6.4",
     "pug": "^2.0.3",
     "sequelize": "^4.42.0",
