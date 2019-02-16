@@ -1,4 +1,4 @@
-import initiateExpress, * as express from "express";
+import initializeExpress, * as express from "express";
 import * as bodyParser from "body-parser";
 import helmet from "helmet";
 import compression from "compression";
@@ -10,7 +10,7 @@ import mountLogger from "./util/http-logger";
 import initializeDatabase from "./db";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
-const app = initiateExpress();
+const app = initializeExpress();
 
 app.use( helmet( { referrerPolicy: true } ) );
 app.use( compression() );
