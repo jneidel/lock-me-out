@@ -1,21 +1,49 @@
-import SequelizeClass, * as Sequelize from "sequelize";
-import { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT } from "../util/secrets";
+import SequelizeClass from "sequelize";
+const mongoose = require( "mongoose" ); // Import * as mongoose does not work as intended
+import mongodbErrors from "mongoose-mongodb-errors";
+import { DB, MONGODB_URI, MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT } from "../util/secrets";
 
-const db = new SequelizeClass( `mysql://${MYSQL_USER}:${MYSQL_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}`,
-  {
+let defaultExport;
+
+if ( DB === "mysql" ) {
+  const db = new SequelizeClass( `mysql://${MYSQL_USER}:${MYSQL_PASS}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}`, {
     operatorsAliases: false,
     timezone        : "+01:00",
   } );
 
-// Import models
-const Item = db.import( "Item", require( "./models/Item" ) );
-const User = db.import( "User", require( "./models/User" ) );
+  // Import models
+  const Item = db.import( "Item", require( "./models/mysql/Item" ) );
+  const User = db.import( "User", require( "./models/mysql/User" ) );
 
-User.hasMany( Item, { as: "Items" } ); // Get all user items with: user.getItems()
+  User.hasMany( Item, { as: "Items" } ); // Get all user items with: user.getItems()
 
-db.Item = Item;
-db.User = User;
+  db.Item = Item;
+  db.User = User;
 
-export default db;
-export { Sequelize };
+  defaultExport = function initSql( callback ) {
+    db.sync( { logging: false } )
+      .then( () => {
+        console.log( "Connected to mysql" );
+        callback();
+      } ).catch( err => {
+        console.error( "MySQL connection error. Make sure your configure MySQL instance is running.", err );
+        console.error( err );
+        process.exit();
+      } );
+  };
+} else {
+  mongoose.Promise = global.Promise;
+  mongoose.plugin( mongodbErrors );
+
+  defaultExport = function initMongoose( callback ) {
+    mongoose.connect( MONGODB_URI, { useNewUrlParser: true } ).catch( err => {
+      console.error( "MongoDB connection error. Make sure your configure MongoDB instance is running.", err );
+      process.exit();
+    } );
+
+    callback();
+  };
+}
+
+export default defaultExport;
 

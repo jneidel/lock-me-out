@@ -1,5 +1,5 @@
 import uuid from "uuid/v4";
-import { DEFAULT_KEYID } from "../../util/secrets";
+import { DEFAULT_KEYID } from "../../../util/secrets";
 
 /*
  * Each encrypted password is described as an item
