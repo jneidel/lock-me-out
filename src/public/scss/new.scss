@@ -1,0 +1,29 @@
+@import "_vars.scss";
+
+// Optional label
+.-error {
+  background: $red;
+  color: $white;
+}
+.-warn {
+  background: $yellow;
+  color: $black;
+}
+.-info {
+  background: $green;
+  color: $black;
+}
+
+.required {
+  padding: 2px 5px;
+  font-size: $fs-small;
+  margin-right: 5px;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -10px;
+}
+

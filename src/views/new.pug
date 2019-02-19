@@ -4,7 +4,18 @@ block styles
   link( rel="stylesheet" type="text/css" href="css/new.css" )
 
 block content
-  h1 new
+  h1 New locked item
+  label( for="name" ) <span class="required -info">optional</span> Name of the item
+  input( type="test" name="name" )
+  label( for="value" ) <span class="required -error">required</span> Value to be encrypted; The item you want to lock away
+  input( type="test" name="value" )
+  label( for="date" ) <span class="required -error">required</span> End date (your encrypted value will not be accessible before this date)
+  input( type="test" name="date" )
+  label( for="user" ) <span class="required -info">optional</span> User to be associated with this item
+  input( type="test" name="user" )
+  label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
+  input( type="test" name="passphrase" )
+  button Submit item
 
 block scripts
   script( src="js/new.js" )
