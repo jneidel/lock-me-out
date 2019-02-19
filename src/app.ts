@@ -7,7 +7,7 @@ import flash from "connect-flash";
 import * as path from "path";
 import mountRoutes from "./routes";
 import mountLogger from "./util/http-logger";
-import initializeDatabase from "./db";
+import initializeDatabase from "./db/initialize";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
 const app = initializeExpress();
