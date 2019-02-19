@@ -37,8 +37,8 @@ app.use( ( req, res, next ) => {
   return next();
 } );
 
-mountRoutes( app, ENVIRONMENT );
 mountLogger( app, ENVIRONMENT );
+mountRoutes( app, ENVIRONMENT );
 
 initializeDatabase( () => {
   app.listen( PORT, () => {
