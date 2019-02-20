@@ -27,16 +27,16 @@ label {
   margin-bottom: -10px;
 }
 
-// Date/time picker on the same line
+// Date and time picker on the same line
 .half-input {
   display: flex;
   flex-direction: row;
 
-  #date {
+  .first {
     margin-right: 10px;
     width: 135px;
   }
-  #time {
+  .second {
     width: 115px;
   }
   // Total width for both inputs:
@@ -48,5 +48,10 @@ input {
 }
 button {
   width: $form-width;
+  height: 23px;
+}
+
+a {
+  text-decoration: none;
 }
 

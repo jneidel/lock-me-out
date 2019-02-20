@@ -11,10 +11,13 @@ block content
   input( type="text" name="value" )
   label( for="date" ) <span class="required -error">required</span> End date (your encrypted value will not be accessible before this date)
   span.half-input
-    input#date( type="date" name="date" )
-    input#time( type="time" name="time" )
-  label( for="user" ) <span class="required -info">optional</span> User to be associated with this item
-  input( type="text" name="user" )
+    input.first( type="date" name="date" )
+    input.second( type="time" name="time" )
+  label( for="user" ) <span class="required -info">optional</span> User to associate this item with
+  span.half-input
+    input.first( type="text" name="user" )
+    a( href="/new-user" )
+      button.second New user
   label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
   input( type="password" name="passphrase" )
   button Submit item
