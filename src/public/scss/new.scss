@@ -1,5 +1,16 @@
 @import "_vars.scss";
 
+a {
+  text-decoration: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 // Optional label
 .-error {
   background: $red;
@@ -49,9 +60,5 @@ input {
 button {
   width: $form-width;
   height: 23px;
-}
-
-a {
-  text-decoration: none;
 }
 

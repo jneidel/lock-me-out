@@ -5,22 +5,27 @@ block styles
 
 block content
   h1 New locked item
-  label( for="name" ) <span class="required -info">optional</span> Name of the item
-  input( type="text" name="name" )
-  label( for="value" ) <span class="required -error">required</span> Value to be encrypted; The item you want to lock away
-  input( type="text" name="value" )
-  label( for="date" ) <span class="required -error">required</span> End date (your encrypted value will not be accessible before this date)
-  span.half-input
-    input.first( type="date" name="date" )
-    input.second( type="time" name="time" )
-  label( for="user" ) <span class="required -info">optional</span> User to associate this item with
-  span.half-input
-    input.first( type="text" name="user" )
-    a( href="/new-user" )
-      button.second New user
-  label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
-  input( type="password" name="passphrase" )
-  button Submit item
+  form( method="post" action="/api/new-item" )
+    label( for="name" ) <span class="required -info">optional</span> Name of the item
+    input( type="text" name="name" )
+    label( for="value" ) <span class="required -error">required</span> Value to be encrypted; The item you want to lock away
+    input( type="text" name="value" required )
+    label( for="date" ) <span class="required -error">required</span> End date (your encrypted value will not be accessible before this date)
+    span.half-input
+      - const now = new Date();
+      - const prefixZero = str => String( str ).length === 1 ? `0${str}` : str;
+      - const date = `${now.getFullYear()}-${prefixZero( now.getMonth() +1 )}-${prefixZero( now.getDate() )}`
+      - const time = `${prefixZero( now.getHours() )}:${prefixZero( now.getMinutes() )}`
+      input.first( type="date" name="date" value=`${date}` required )
+      input.second( type="time" name="time" value=`${time}` required )
+    label( for="user" ) <span class="required -info">optional</span> User to associate this item with
+    span.half-input
+      input.first( type="text" name="user" )
+      a( href="/new-user" )
+        button.second New user
+    label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
+    input( type="password" name="passphrase" )
+    button( type="submit" ) Submit item
 
 block scripts
   script( src="js/new.js" )
