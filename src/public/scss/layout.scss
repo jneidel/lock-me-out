@@ -4,6 +4,7 @@ html {
   font-size: $fs-text;
   font-family: $f-text;
   color: $white;
+  box-sizing: border-box;
 }
 
 body {

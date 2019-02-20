@@ -57,3 +57,7 @@ button {
   }
 }
 
+input { // Fix chrome issue where input fields are only 18px high, wheres firefox is 23px
+  line-height: 23px;
+}
+
