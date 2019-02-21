@@ -25,8 +25,8 @@ const schema = new mongoose.Schema( {
     type   : String,
     default: null,
     get    : () => {
-      const name = this.getDataValue( "name" );
-      const keyid = this.getDataValue( "keyid" );
+      const name = this.name;
+      const keyid = this.keyid;
 
       return name === null ? keyid : name;
     },
