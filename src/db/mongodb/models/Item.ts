@@ -10,6 +10,7 @@ const schema = new mongoose.Schema( {
   id: {
     type   : String,
     default: uuid(),
+    index  : true,
   },
   date: {
     type    : Date,
@@ -39,9 +40,8 @@ const schema = new mongoose.Schema( {
   user: { // User this item belongs to
     type   : String,
     default: null,
+    index  : true,
   },
 } );
-
-schema.index( { id: 1, user: 1 } );
 
 export default mongoose.model( "items", schema );

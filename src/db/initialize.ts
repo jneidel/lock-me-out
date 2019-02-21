@@ -38,7 +38,7 @@ if ( DB === "mysql" ) {
   mongoose.plugin( mongodbErrors );
 
   defaultExport = function initMongoose( callback ) {
-    mongoose.connect( MONGODB_URI, { useNewUrlParser: true } ).catch( err => {
+    mongoose.connect( MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true } ).catch( err => {
       console.error( "MongoDB connection error. Make sure your configure MongoDB instance is running.", err );
       process.exit();
     } );

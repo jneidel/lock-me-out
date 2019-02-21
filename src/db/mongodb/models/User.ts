@@ -8,6 +8,7 @@ const schema = new mongoose.Schema( {
     type    : String,
     default : uuid(),
     validate: x => !~reservedUsernames.indexOf( x ),
+    index: true,
   },
   keyid: {
     type    : String,
@@ -15,8 +16,6 @@ const schema = new mongoose.Schema( {
     validate: x => x.length === 8 || x.length === 16,
   },
 } );
-
-schema.index( { id: 1 } );
 
 export default mongoose.model( "users", schema );
 
