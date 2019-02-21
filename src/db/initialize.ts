@@ -2,8 +2,8 @@ import SequelizeClass from "sequelize";
 const mongoose = require( "mongoose" ); // Import * as mongoose does not work as intended
 import mongodbErrors from "mongoose-mongodb-errors";
 import { DB, MONGODB_URI, MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT } from "../util/secrets";
-import "./models/Item"
-import "./models/User"
+import "./mongodb/models/Item"
+import "./mongodb/models/User"
 
 let defaultExport;
 
@@ -14,8 +14,8 @@ if ( DB === "mysql" ) {
   } );
 
   // Import models
-  const Item = db.import( "Item", require( "./models/mysql/Item" ) );
-  const User = db.import( "User", require( "./models/mysql/User" ) );
+  const Item = db.import( "Item", require( "./mysql/models/Item" ) );
+  const User = db.import( "User", require( "./mysql/models/User" ) );
 
   User.hasMany( Item, { as: "Items" } ); // Get all user items with: user.getItems()
 

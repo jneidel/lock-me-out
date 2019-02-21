@@ -1,6 +1,6 @@
 const mongoose = require( "mongoose" );
 import uuid from "uuid/v4";
-import reservedUsernames from "../reserved-usernames";
+import reservedUsernames from "../../reserved-usernames";
 import { DEFAULT_KEYID } from "../../../util/secrets";
 
 const schema = new mongoose.Schema( {
