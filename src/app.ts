@@ -8,6 +8,7 @@ import * as path from "path";
 import mountRoutes from "./routes";
 import mountLogger from "./util/http-logger";
 import initializeDatabase from "./db/initialize";
+import initializeConfig from "./util/config";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
 const app = initializeExpress();
@@ -40,6 +41,7 @@ app.use( ( req, res, next ) => {
 mountLogger( app, ENVIRONMENT );
 mountRoutes( app, ENVIRONMENT );
 
+initializeConfig();
 initializeDatabase( () => {
   app.listen( PORT, () => {
     console.log( `Server running on port ${PORT}` );
