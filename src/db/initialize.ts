@@ -2,8 +2,8 @@ import SequelizeClass from "sequelize";
 const mongoose = require( "mongoose" ); // Import * as mongoose does not work as intended
 import mongodbErrors from "mongoose-mongodb-errors";
 import { DB, MONGODB_URI, MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB, MYSQL_PORT } from "../util/secrets";
-import "./mongodb/models/Item"
-import "./mongodb/models/User"
+import "./mongodb/models/Item";
+import "./mongodb/models/User";
 
 let defaultExport;
 

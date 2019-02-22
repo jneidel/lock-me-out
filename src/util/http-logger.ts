@@ -13,8 +13,7 @@ const filterResources = ( req: any ) => {
 
 export default function mountLogger( app, ENVIRONMENT ) {
   // Log development requests to console
-  if ( ENVIRONMENT === "development" ) {
+  if ( ENVIRONMENT === "development" )
     app.use( logger( patternShort, { skip: filterResources } ) );
-  }
 }
 

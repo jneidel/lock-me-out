@@ -8,7 +8,7 @@ const schema = new mongoose.Schema( {
     type    : String,
     default : uuid(),
     validate: x => !~reservedUsernames.indexOf( x ),
-    index: true,
+    index   : true,
   },
   keyid: {
     type    : String,

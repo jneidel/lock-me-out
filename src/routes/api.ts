@@ -9,7 +9,7 @@ router.post( "/new-item", ( req, res ) => {
     name: formData.name,
     date: new Date( `${formData.date}T${formData.time}` ),
     user: formData.user,
-  }
+  };
 
   db.createItem( data )
     .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) )

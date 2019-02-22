@@ -4,7 +4,7 @@ const submitButton = document.querySelector( "button" );
 const inputField = document.querySelector( "input" );
 
 submitButton.addEventListener( "click", async () => {
-  const value = inputField.value;
+  const { value } = inputField;
 
   axios.post( "/api/get-status", { value } )
     .then( res => res.data )
