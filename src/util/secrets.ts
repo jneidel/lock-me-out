@@ -2,10 +2,10 @@ import { config as dotenv } from "dotenv";
 import { existsSync } from "fs";
 
 if ( existsSync( ".env" ) ) {
-  console.log( "Using .env file to supply config environment variables" );
+  console.log( "Using '.env' file to supply environmental variables" );
   dotenv( { path: ".env" } );
 } else {
-  console.log( "Using .env.example file to supply config environment variables" );
+  console.log( "Using '.env.example' file to supply environmental variables" );
   dotenv( { path: ".env.example" } ); // Fallback if no own .env file exists
 }
 
