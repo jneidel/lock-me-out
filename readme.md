@@ -21,6 +21,14 @@
 ## Installation
 -->
 
+## Dependencies
+
+**`gpg - 2.x`:**
+
+GnuPG is required the encryption of items.
+
+See [jneidel/lock-me-out-api](https://github.com/jneidel/lock-me-out-api/blob/master/bin/install-gpg.sh) for an gpg install script.
+
 ## Test
 
 ```
