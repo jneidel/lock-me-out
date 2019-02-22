@@ -25,7 +25,7 @@ export default function createItem( sequelize, DataTypes ): {} {
       defaultValue: DEFAULT_KEYID,
       allowNull   : false,
       validate    : {
-        len: [ 8, 16 ],
+        len: [ 8, 16, 40 ],
       },
     },
     name: {

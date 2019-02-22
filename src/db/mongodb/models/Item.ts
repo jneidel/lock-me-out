@@ -19,7 +19,7 @@ const schema = new mongoose.Schema( {
   keyid: {
     type    : String,
     default : DEFAULT_KEYID,
-    validate: x => x.length === 8 || x.length === 16,
+    validate: x => x.length === 8 || x.length === 16 || x.length === 40,
   },
   name: {
     type   : String,
