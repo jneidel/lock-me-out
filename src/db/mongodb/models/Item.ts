@@ -38,9 +38,10 @@ const schema = new mongoose.Schema( {
     default: true,
   },
   user: { // User this item belongs to
-    type   : String,
-    default: null,
-    index  : true,
+    type    : String,
+    default : null,
+    validate: x => x !== "",
+    index   : true,
   },
 } );
 

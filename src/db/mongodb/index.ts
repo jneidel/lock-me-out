@@ -1,12 +1,28 @@
 import Item from "./models/Item";
+import User from "./models/User";
 
-export async function createItem( data: { name: String; date: Date; user: String } ) {
+type ItemData {
+  date: Date,
+  name: String,
+  //keyid: String,
+  user: String,
+}
+
+export async function createItem( data: ItemData ) {
   const item = new Item( data );
 
-  try {
-    await item.save();
-    return item.id;
-  } catch ( err ) {
-    return err;
-  }
+  return item.save() // Handle error in routes
+    .then( () => item.id );
+}
+
+type UserData {
+  id: String,
+  //keyid: String,
+}
+
+export async function createUser( data: UserData ) {
+  const user = new User( data );
+
+  return user.save() // Handle error in routes
+    .then( () => user.id );
 }

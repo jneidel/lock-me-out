@@ -4,7 +4,6 @@ const db = require( "../db" );
 
 router.post( "/new-item", ( req, res ) => {
   const formData = req.body;
-
   const data = { // Prepare data for database
     name: formData.name,
     date: new Date( `${formData.date}T${formData.time}` ),
@@ -14,10 +13,25 @@ router.post( "/new-item", ( req, res ) => {
   db.createItem( data )
     .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) )
     .catch( err => {
-      req.flash( "error", "Invalid data in submitted form, please retry" );
+      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
       res.status( 400 ).redirect( `/new` );
     } );
 } );
+
+router.post( "/new-user", ( req, res ) => {
+  const formData = req.body;
+  const data = { // Prepare data for database
+    name: formData.username,
+  };
+
+  db.createUser( data )
+    .then( userId => res.status( 200 ).redirect( `/status?user=${userId}` ) )
+    .catch( err => {
+      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
+      res.status( 400 ).redirect( `/new-user` );
+    } );
+} );
+
 
 // GET redirect
 router.get( "/", ( req, res ) => {
