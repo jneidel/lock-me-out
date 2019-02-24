@@ -23,7 +23,7 @@ block content
       - const userValue = user ? user : "";
       input.first( type="text" name="user" value=`${userValue}` )
       a( href="/new-user" )
-        button.second New user
+        button.second( form="none" ) New user
     label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
     - const passphraseDisabled = !!user;
     if passphraseDisabled

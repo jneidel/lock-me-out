@@ -11,7 +11,6 @@ function enablePassphrase( el ) {
     el.placeholder = "The users passphrase"
   }
 }
-
 function passphraseEvent() {
   const { value: user } = userIpt;
 
@@ -22,5 +21,19 @@ function passphraseEvent() {
   }
 }
 
-userIpt.addEventListener( "keyup", passphraseEvent);
+function changeNewUserUrl() {
+  const newUserLink = document.querySelector( "button[class='second']" ).parentNode;
+  const { value: user } = userIpt;
+  const { href } = newUserLink;
+
+  const url = new URL( `${href}` );
+  url.search = `?user=${user}`;
+
+  newUserLink.href = url.href;
+}
+
+userIpt.addEventListener( "keyup", () => {
+  passphraseEvent();
+  changeNewUserUrl();
+});
 
