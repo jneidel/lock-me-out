@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
 const db = require( "../db" );
+import Key from "../gpg/generateKey";
 
 router.post( "/new-item", ( req, res ) => {
   const formData = req.body;
@@ -18,18 +19,31 @@ router.post( "/new-item", ( req, res ) => {
     .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) );
 } );
 
-router.post( "/new-user", ( req, res ) => {
+router.post( "/new-user", async ( req, res ) => {
   const formData = req.body;
   const data = { // Prepare data for database
-    name: formData.username,
+    id: formData.username,
   };
 
-  db.createUser( data )
-    .catch( err => {
+  try {
+    const userId = await db.createUser( data )
+    const key = new Key();
+    await key.generate( formData.passphrase, userId );
+    await db.insertUserKeyid( userId, key.id );
+
+    res.status( 200 ).redirect( `/status?user=${userId}` )
+  } catch( err ) {
+    console.error( err );
+
+    if ( err._message === "users validation failed" ) {
+      req.flash( "error", "Username already in use." );
+    } else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) ) {
+      req.flash( "error", "Username is prohibited from usage." );
+    } else {
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-      return res.status( 400 ).redirect( `/new-user` );
-    } )
-    .then( userId => res.status( 200 ).redirect( `/status?user=${userId}` ) );
+    }
+    res.status( 400 ).redirect( `/new-user` );
+  }
 } );
 
 // GET redirect
