@@ -3,5 +3,5 @@ import * as mongodb from "./mongodb";
 
 const exportObj = DB === "mysql" ? {} : mongodb;
 
-exports = exportObj;
+module.exports = exportObj;
 

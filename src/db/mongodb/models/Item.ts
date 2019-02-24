@@ -10,7 +10,7 @@ const schema = new mongoose.Schema( {
   id: {
     type   : String,
     default: uuid(),
-    index  : true,
+    unique : true,
   },
   date: {
     type    : Date,
@@ -42,7 +42,6 @@ const schema = new mongoose.Schema( {
     type    : String,
     default : null,
     validate: x => x !== "",
-    index   : true,
   },
 } );
 

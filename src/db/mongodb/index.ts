@@ -24,7 +24,8 @@ export function createUser( data: UserData ): Promise<String> {
 }
 
 function insertKeyid( db, id: String, keyid: String ): void {
-  db.updateOne( { id }, { keyid } );
+  db.updateOne( { id }, { keyid } )
+  .catch( err => console.error( err ) ); // This is required for the insert to work
 }
 export function insertItemKeyid( id: String, keyid: String ): void {
   insertKeyid( Item, id, keyid );
