@@ -11,11 +11,11 @@ router.post( "/new-item", ( req, res ) => {
   };
 
   db.createItem( data )
-    .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) )
     .catch( err => {
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-      res.status( 400 ).redirect( `/new` );
-    } );
+      return res.status( 400 ).redirect( `/new` );
+    } )
+    .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) );
 } );
 
 router.post( "/new-user", ( req, res ) => {
@@ -25,13 +25,12 @@ router.post( "/new-user", ( req, res ) => {
   };
 
   db.createUser( data )
-    .then( userId => res.status( 200 ).redirect( `/status?user=${userId}` ) )
     .catch( err => {
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-      res.status( 400 ).redirect( `/new-user` );
-    } );
+      return res.status( 400 ).redirect( `/new-user` );
+    } )
+    .then( userId => res.status( 200 ).redirect( `/status?user=${userId}` ) );
 } );
-
 
 // GET redirect
 router.get( "/", ( req, res ) => {

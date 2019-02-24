@@ -4,7 +4,7 @@ import { CONFIG_DIR, DEFAULT_KEYID, DEFAULT_PASSPHRASE, EXEC_SHELL } from "./sec
 /*
  * Setup configuration directory (where gpg keys and encrypted items are stored)
  */
-export default function initializeConfig() {
+export default function initializeConfig(): void {
   config.setConfigDir( CONFIG_DIR );
   config.createConfigDir();
 
@@ -14,7 +14,7 @@ export default function initializeConfig() {
       if ( version === null || version[0] < 2 ) {
         console.error( `GPG version too low, v2.x is required.
   Current version: ${version}
-  See https://github.com/jneidel/lock-me-out for gpg 2.x install instructions.` )
+  See https://github.com/jneidel/lock-me-out for gpg 2.x install instructions.` );
         process.exit();
       }
     } );

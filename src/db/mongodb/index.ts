@@ -1,35 +1,35 @@
 import Item from "./models/Item";
 import User from "./models/User";
 
-type ItemData {
-  date: Date,
-  name: String,
-  user: String,
+interface ItemData {
+  date: Date;
+  name: String;
+  user: String;
 }
-export async function createItem( data: ItemData ): String {
+export function createItem( data: ItemData ): Promise<String> {
   const item = new Item( data );
 
   return item.save() // Handle error in routes
     .then( () => item.id );
 }
 
-type UserData {
-  id: String,
+interface UserData {
+  id: String;
 }
-export async function createUser( data: UserData ): String {
+export function createUser( data: UserData ): Promise<String> {
   const user = new User( data );
 
   return user.save() // Handle error in routes
     .then( () => user.id );
 }
 
-async function insertKeyid( db: {}, id: String, keyid: String ) {
+function insertKeyid( db, id: String, keyid: String ): void {
   db.updateOne( { id }, { keyid } );
 }
-export async function insertItemKeyid( id: String, keyid: String ): void {
+export function insertItemKeyid( id: String, keyid: String ): void {
   insertKeyid( Item, id, keyid );
 }
-export async function insertUserKeyid( id: String, keyid: String ): void {
+export function insertUserKeyid( id: String, keyid: String ): void {
   insertKeyid( User, id, keyid );
 }
 

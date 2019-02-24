@@ -3,7 +3,7 @@ const axios = require( "axios" );
 const submitButton = document.querySelector( "button" );
 const inputField = document.querySelector( "input" );
 
-submitButton.addEventListener( "click", async () => {
+submitButton.addEventListener( "click", () => {
   const { value } = inputField;
 
   axios.post( "/api/get-status", { value } )

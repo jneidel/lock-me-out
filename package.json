@@ -11,7 +11,7 @@
   },
   "main": "src/app.js",
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "os": [
     "!win32"
@@ -28,7 +28,7 @@
     "watch-test": "jest --watch",
     "watch-unit": "jest --watch test/unit/**/*.test.ts",
     "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env",
-    "lint": "npm run lint-ts && npm run lint-js",
+    "lint": "npm run -s lint-ts && npm run -s lint-js",
     "lint-ts": "eslint --fix -c ~/.eslintrc-ts --ext .ts --parser-options \"{ 'ecmaVersion': 10, 'ecmaFeatures': { 'impliedStrict': true }, project: ./tsconfig.json }\" src",
     "lint-js": "eslint --fix --ext .js src/public"
   },

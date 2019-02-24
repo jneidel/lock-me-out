@@ -30,6 +30,7 @@ const schema = new mongoose.Schema( {
 
       return name === null ? keyid : name;
     },
+    trim    : true,
     validate: x => x !== "",
   },
   default: { // Will never be accessed directly

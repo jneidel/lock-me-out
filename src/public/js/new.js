@@ -2,23 +2,22 @@ const userIpt = document.querySelector( "input[name='user']" );
 const passphraseIpt = document.querySelector( "input[name='passphrase']" );
 
 function disablePassphrase( el ) {
-  el.disabled = false
-  el.placeholder = ""
+  el.disabled = false;
+  el.placeholder = "";
 }
 function enablePassphrase( el ) {
   if ( !el.disabled ) {
-    el.disabled = true
-    el.placeholder = "The users passphrase"
+    el.disabled = true;
+    el.placeholder = "The users passphrase";
   }
 }
 function passphraseEvent() {
   const { value: user } = userIpt;
 
-  if ( user === "" ) {
+  if ( user === "" )
     disablePassphrase( passphraseIpt );
-  } else {
+  else
     enablePassphrase( passphraseIpt );
-  }
 }
 
 function changeNewUserUrl() {
@@ -35,5 +34,5 @@ function changeNewUserUrl() {
 userIpt.addEventListener( "keyup", () => {
   passphraseEvent();
   changeNewUserUrl();
-});
+} );
 
