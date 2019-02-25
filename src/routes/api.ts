@@ -3,22 +3,6 @@ const router = Router();
 const db = require( "../db" );
 import Key from "../gpg/generateKey";
 
-router.post( "/new-item", ( req, res ) => {
-  const formData = req.body;
-  const data = { // Prepare data for database
-    name: formData.name,
-    date: new Date( `${formData.date}T${formData.time}` ),
-    user: formData.user,
-  };
-
-  db.createItem( data )
-    .catch( err => {
-      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-      return res.status( 400 ).redirect( `/new` );
-    } )
-    .then( itemId => res.status( 200 ).redirect( `/status?item=${itemId}` ) );
-} );
-
 router.post( "/new-user", async ( req, res ) => {
   const formData = req.body;
   const data = { // Prepare data for database
@@ -27,12 +11,11 @@ router.post( "/new-user", async ( req, res ) => {
 
   try {
     const userId = await db.createUser( data )
-    const key = new Key();
+    const key = new Key( "User" );
     await key.generate( formData.passphrase, userId );
-    await db.insertUserKeyid( userId, key.id );
 
     res.status( 200 ).redirect( `/status?user=${userId}` )
-  } catch( err ) {
+  } catch( err ) { // Using .catch express throws because 2x res.redirect
     console.error( err );
 
     if ( err._message === "users validation failed" ) {
@@ -43,6 +26,44 @@ router.post( "/new-user", async ( req, res ) => {
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
     }
     res.status( 400 ).redirect( `/new-user` );
+  }
+} );
+
+router.post( "/new-item", async ( req, res ) => {
+  const formData = req.body;
+  const user = formData.user;
+  const passphrase = formData.passphrase;
+
+  const data = { // Prepare data for database
+    name: formData.name,
+    date: new Date( `${formData.date}T${formData.time}` ),
+    user: user !== "" ? user : null,
+  };
+
+  try {
+    if ( user !== "" ) { // User item
+      const user = await db.findUser( data.user ); // [ { id } ] or []
+      if ( user.length < 1 ) { // User not found
+        throw new Error( "User not found" );
+      }
+    } // Check that user exists before creating item in db
+    const itemId = await db.createItem( data )
+
+    if ( user === "" ) { // Anonymous item
+      const key = new Key( "Item" );
+      await key.generate( passphrase, itemId );
+    }
+
+    res.status( 200 ).redirect( `/status?item=${itemId}` )
+  } catch( err ) { // Using .catch express throws because 2x res.redirect
+    console.error( err );
+
+    if ( err.message === "User not found" ) {
+      req.flash( "error", "Username does not exists. Please create it before assigning any items." );
+    } else {
+      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
+    }
+    res.status( 400 ).redirect( `/new` );
   }
 } );
 
