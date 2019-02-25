@@ -14,6 +14,7 @@ router.post( "/new-user", async ( req, res ) => {
     const key = new Key( "User" );
     await key.generate( formData.passphrase, userId );
 
+    req.flash( "info", "User successfully created." );
     res.status( 200 ).redirect( `/status?user=${userId}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( "Error thrown:", err );
@@ -54,6 +55,7 @@ router.post( "/new-item", async ( req, res ) => {
       await key.generate( passphrase, itemId );
     }
 
+    req.flash( "info", "Item successfully created." );
     res.status( 200 ).redirect( `/status?item=${itemId}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( "Error thrown:", err );
