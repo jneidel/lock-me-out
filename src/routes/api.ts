@@ -10,21 +10,21 @@ router.post( "/new-user", async ( req, res ) => {
   };
 
   try {
-    const userId = await db.createUser( data )
+    const userId = await db.createUser( data );
     const key = new Key( "User" );
     await key.generate( formData.passphrase, userId );
 
-    res.status( 200 ).redirect( `/status?user=${userId}` )
-  } catch( err ) { // Using .catch express throws because 2x res.redirect
+    res.status( 200 ).redirect( `/status?user=${userId}` );
+  } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( err );
 
-    if ( err._message === "users validation failed" ) {
+    if ( err._message === "users validation failed" )
       req.flash( "error", "Username already in use." );
-    } else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) ) {
+    else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) )
       req.flash( "error", "Username is prohibited from usage." );
-    } else {
+    else
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-    }
+
     res.status( 400 ).redirect( `/new-user` );
   }
 } );
@@ -43,26 +43,26 @@ router.post( "/new-item", async ( req, res ) => {
   try {
     if ( user !== "" ) { // User item
       const user = await db.findUser( data.user ); // [ { id } ] or []
-      if ( user.length < 1 ) { // User not found
+      if ( user.length === 0 ) { // User not found
         throw new Error( "User not found" );
       }
     } // Check that user exists before creating item in db
-    const itemId = await db.createItem( data )
+    const itemId = await db.createItem( data );
 
     if ( user === "" ) { // Anonymous item
       const key = new Key( "Item" );
       await key.generate( passphrase, itemId );
     }
 
-    res.status( 200 ).redirect( `/status?item=${itemId}` )
-  } catch( err ) { // Using .catch express throws because 2x res.redirect
+    res.status( 200 ).redirect( `/status?item=${itemId}` );
+  } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( err );
 
-    if ( err.message === "User not found" ) {
+    if ( err.message === "User not found" )
       req.flash( "error", "Username does not exists. Please create it before assigning any items." );
-    } else {
+    else
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-    }
+
     res.status( 400 ).redirect( `/new` );
   }
 } );
