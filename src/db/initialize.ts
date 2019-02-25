@@ -42,7 +42,7 @@ if ( DB === "mysql" ) {
       console.error( "MongoDB connection error. Make sure your configure MongoDB instance is running.", err );
       process.exit();
     } );
-
+   
     callback();
   };
 }

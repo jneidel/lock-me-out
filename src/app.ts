@@ -1,14 +1,14 @@
 import initializeExpress, * as express from "express";
+import * as path from "path";
 import * as bodyParser from "body-parser";
 import helmet from "helmet";
 import compression from "compression";
 import session from "express-session";
 import flash from "connect-flash";
-import * as path from "path";
-import mountRoutes from "./routes";
 import mountLogger from "./util/http-logger";
-import initializeDatabase from "./db/initialize";
+import mountRoutes from "./routes";
 import initializeConfig from "./util/config";
+import initializeDatabase from "./db/initialize";
 import { ENVIRONMENT, SESSION_SECRET, PORT } from "./util/secrets";
 
 const app = initializeExpress();
@@ -29,7 +29,7 @@ app.use( session( {
   cookie           : {
     maxAge  : 1000 * 60 * 60 * 24 * 30, // 30 days
     httpOnly: true,
-    secure  : true,
+    secure  : false, // false for localhost
   },
 } ) );
 app.use( flash() );

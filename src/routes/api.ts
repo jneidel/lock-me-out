@@ -16,12 +16,12 @@ router.post( "/new-user", async ( req, res ) => {
 
     res.status( 200 ).redirect( `/status?user=${userId}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
-    console.error( err );
+    console.error( "Error thrown:", err );
 
     if ( err._message === "users validation failed" )
-      req.flash( "error", "Username already in use." );
-    else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) )
       req.flash( "error", "Username is prohibited from usage." );
+    else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) )
+      req.flash( "error", "Username already in use." );
     else
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
 
@@ -56,7 +56,7 @@ router.post( "/new-item", async ( req, res ) => {
 
     res.status( 200 ).redirect( `/status?item=${itemId}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
-    console.error( err );
+    console.error( "Error thrown:", err );
 
     if ( err.message === "User not found" )
       req.flash( "error", "Username does not exists. Please create it before assigning any items." );
