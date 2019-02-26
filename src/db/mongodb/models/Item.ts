@@ -1,5 +1,5 @@
 const mongoose = require( "mongoose" );
-import uuid from "uuid/v4";
+import uuid from "../../../util/uuid";
 import { DEFAULT_KEYID } from "../../../util/secrets";
 
 /*
