@@ -47,7 +47,9 @@ $ npm run test
 
 **Icons**
 
-- [Trash can](https://www.flaticon.com/free-icon/rubbish-bin_63260)
+- [Trash can](https://www.flaticon.com/free-icon/backspace-arrow_61167)
+- [Check](https://www.flaticon.com/free-icon/checked_128384)
+- [Cross](https://www.flaticon.com/free-icon/cancel_128397)
 
 ## License
 
