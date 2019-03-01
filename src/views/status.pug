@@ -39,10 +39,10 @@ block content
           td= date
           if isUser
             td
-              a( href=`${item.id}` )
+              a( href=`/status?item=${item.id}` )
                 p View
           td
-            img( src="img/delete.png" )
+            img#delete( src="img/delete.png" alt="Remove" )
     if isItem && items[0].status
         button#decrypt Decrypt
 
