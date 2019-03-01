@@ -68,9 +68,13 @@ export class NewItem extends BaseItem {
 }
 
 export class ExistingItem extends BaseItem {
-  constructor( id ) {
+  constructor( id, data = {} ) {
     super();
     this.id = id;
+
+    for ( const prop in data ) {
+      this[prop] = data[prop];
+    }
   }
 
   public async fetch() {

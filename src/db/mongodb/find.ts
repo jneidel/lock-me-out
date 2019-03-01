@@ -15,3 +15,10 @@ export function findItem( itemId ) {
   ] );
 }
 
+export function findUserItems( userId ) {
+  return Item.aggregate( [
+    { $match: { user: userId } },
+    { $project: { id: 1, date: 1, name: 1, _id: 0 } },
+  ] );
+}
+

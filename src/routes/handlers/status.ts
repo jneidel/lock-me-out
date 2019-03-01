@@ -1,29 +1,46 @@
 import { ExistingItem } from "../../gpg/Item";
+const db = require( "../../db" );
 
-export async function fetchItem( req, res, next ) {
-  const itemId = req.query.item;
+export async function formatItems( req, res, next ) {
+  const data = req.data;
+  const isItem = data.isItem;
+  const isUser = data.isUser;
 
-  if ( itemId ) {
-    try {
-      const item = new ExistingItem( itemId );
-      await item.fetch();
+  const items: object[] = [];
+  function addItem( item ) {
+    items.push( {
+      id: item.id,
+      status: item.testDate(),
+      date: item.date,
+      name: item.name,
+    } )
+  }
 
-      req.body.isItem = true;
-      req.body.items = [ {
-        id: item.id,
-        status: item.testDate(),
-        date: item.date,
-        name: item.name,
-      } ]
-    } catch( err ) {
-      if ( err.message === "Item does not exit" ) {
-        req.flash( "error", "Item does not exit. Please enter a valid item id." );
-      } else {
-        req.flash( "error", "There was an error getting your item." );
-      }
+  if ( isItem ) {
+    const item = req.data.item;
+    addItem( item );
+  } else if ( isUser ) {
+    const userItems = req.data.userItems;
+    userItems.forEach( item => addItem( item ) );
+  }
 
-      res.status( 400 ).redirect( `/status` );
-    }
+  req.data.items = items;
+  next();
+}
+
+export async function fetchUserItems( req, res, next ) {
+  const userId = req.data.userId;
+
+  if ( userId ) {
+    const userItems = await db.findUserItems( userId );
+    const items: ExistingItem[] = [];
+
+    userItems.forEach( itemData => {
+      const item = new ExistingItem( itemData.id, itemData );
+      items.push( item );
+    } );
+
+    req.data.userItems = items;
   }
 
   next();
