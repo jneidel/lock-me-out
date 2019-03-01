@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router = Router();
 const db = require( "../db" );
+import { NewItem } from "../gpg/Item";
 import Key from "../gpg/generateKey";
 
 router.post( "/new-user", async ( req, res ) => {
@@ -32,31 +33,18 @@ router.post( "/new-user", async ( req, res ) => {
 
 router.post( "/new-item", async ( req, res ) => {
   const formData = req.body;
-  const user = formData.user;
   const passphrase = formData.passphrase;
+  const value = formData.value;
 
-  const data = { // Prepare data for database
-    name: formData.name,
-    date: new Date( `${formData.date}T${formData.time}` ),
-    user: user !== "" ? user : null,
-  };
-
+  const item = new NewItem( formData );
   try {
-    if ( user !== "" ) { // User item
-      const user = await db.findUser( data.user ); // [ { id } ] or []
-      if ( user.length === 0 ) { // User not found
-        throw new Error( "User not found" );
-      }
-    } // Check that user exists before creating item in db
-    const itemId = await db.createItem( data );
-
-    if ( user === "" ) { // Anonymous item
-      const key = new Key( "Item" );
-      await key.generate( passphrase, itemId );
-    }
+    await item.userItem(); // Get keyid from user
+    await item.create();
+    await item.anonItem( passphrase ); // Create new key if no user
+    await item.encrypt( value, passphrase );
 
     req.flash( "info", "Item successfully created." );
-    res.status( 200 ).redirect( `/status?item=${itemId}` );
+    res.status( 200 ).redirect( `/status?item=${item.id}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( "Error thrown:", err );
 
