@@ -4,7 +4,7 @@ import User from "./models/User";
 export function findUser( userId ) {
   return User.aggregate( [
     { $match: { id: userId } },
-    { $project: { id: 1, _id: 0 } },
+    { $project: { id: 1, keyid: 1, _id: 0 } },
   ] );
 }
 

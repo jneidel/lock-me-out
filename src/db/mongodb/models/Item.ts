@@ -6,6 +6,8 @@ import { DEFAULT_KEYID } from "../../../util/secrets";
  * Each encrypted password is described as an item
  */
 
+const notEmpty = x => x !== "";
+
 const schema = new mongoose.Schema( {
   id: {
     type   : String,
@@ -31,18 +33,18 @@ const schema = new mongoose.Schema( {
       return name === null ? keyid : name;
     },
     trim    : true,
-    validate: x => x !== "",
-  },
-  default: { // Will never be accessed directly
-    get    : () => DEFAULT_KEYID === this.keyid,
-    type   : Boolean,
-    default: true,
+    validate: notEmpty,
   },
   user: { // User this item belongs to
     type    : String,
     default : null,
-    validate: x => x !== "",
+    validate: notEmpty,
   },
+  encryptedValue: {
+    type    : String,
+    default : null,
+    validate: notEmpty,
+  }
 } );
 
 export default mongoose.model( "items", schema );

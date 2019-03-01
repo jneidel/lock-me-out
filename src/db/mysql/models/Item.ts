@@ -42,18 +42,19 @@ export default function createItem( sequelize, DataTypes ): {} {
         notEmpty: true,
       },
     },
-    default: { // Will never be accessed directly
-      get() {
-        return DEFAULT_KEYID === this.getDataValue( "keyid" );
-      },
-      type        : DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
     user: { // User this item belongs to
       type        : DataTypes.STRING,
       defaultValue: null,
       allowNull   : true,
     },
+    encryptedValue: {
+      type        : DataTypes.STRING,
+      defaultValue: null,
+      allowNull   : true,
+      validate: {
+        notEmpty: true,
+      }
+    }
   }, {
     tableName: "items",
     indexes  : [
