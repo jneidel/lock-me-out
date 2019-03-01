@@ -8,7 +8,8 @@ block content
   label( for="status" ) Get the status of an encrypted item by entering it's code:
   - const inputValue = isItem ? items[0].id : user ? user : "";
   input( type="text" name="status" value=`${inputValue}` )
-  button Get Status
+  a( href="/status" )
+    button Get Status
   if isItem
     h2 Item Info:
   if isUser

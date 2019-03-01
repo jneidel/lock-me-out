@@ -1,12 +1,14 @@
-const axios = require( "axios" );
+const statusIpt = document.querySelector("input");
 
-const submitButton = document.querySelector( "button" );
-const inputField = document.querySelector( "input" );
+statusIpt.addEventListener( "keyup", () => {
+  const getStatusLink = document.querySelector( "button" ).parentNode;
+  const { value } = statusIpt;
+  const isItem = value.length === 36;
 
-submitButton.addEventListener( "click", () => {
-  const { value } = inputField;
+  const { href } = getStatusLink;
+  const url = new URL( `${href}` );
+  url.search = isItem ? `?item=${value}` : `?user=${value}`;
 
-  axios.post( "/api/get-status", { value } )
-    .then( res => res.data )
-    .then( data => console.log( data ) );
+  getStatusLink.href = url.href;
 } );
+
