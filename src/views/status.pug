@@ -6,14 +6,14 @@ block styles
 block content
   h1 Locked item status
   label( for="status" ) Get the status of an encrypted item by entering it's code:
-  - const inputValue = isItem ? items[0].id : user;
+  - const inputValue = isItem ? items[0].id : user ? user : "";
   input( type="text" name="status" value=`${inputValue}` )
   button Get Status
   if isItem
     h2 Item Info:
   if isUser
     h2 Items:
-  if items
+  if isItem || isUser
     table
       tr
         th Status
