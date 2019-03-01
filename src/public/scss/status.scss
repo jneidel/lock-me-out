@@ -1,21 +1,29 @@
 @import "_vars.scss";
 
+#decrypt {
+  margin-top: 20px;
+}
+#delete {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+}
+
 // Table styles
 table {
   border-collapse: collapse;
 }
 td:not(:last-child), th:not(:last-child) {
-  text-align: center;
   padding-right: 20px;
 }
 th {
   border-bottom: 1px solid $white;
 }
 td {
+  text-align: center;
   padding-top: 5px;
-}
-
-#decrypt {
-  margin-top: 20px;
 }
 
