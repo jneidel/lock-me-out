@@ -8,7 +8,13 @@ export async function fetchItem( req, res, next ) {
       const item = new ExistingItem( itemId );
       await item.fetch();
 
-      req.body.item = item;
+      req.body.isItem = true;
+      req.body.items = [ {
+        id: item.id,
+        status: item.testDate(),
+        date: item.date,
+        name: item.name,
+      } ]
     } catch( err ) {
       if ( err.message === "Item does not exit" ) {
         req.flash( "error", "Item does not exit. Please enter a valid item id." );

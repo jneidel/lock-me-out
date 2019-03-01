@@ -6,9 +6,46 @@ block styles
 block content
   h1 Locked item status
   label( for="status" ) Get the status of an encrypted item by entering it's code:
-  - const inputValue = item ? item : user;
+  - const inputValue = isItem ? items[0].id : user;
   input( type="text" name="status" value=`${inputValue}` )
   button Get Status
+  if isItem
+    h2 Item Info:
+  if isUser
+    h2 Items:
+  if items
+    table
+      tr
+        th Status
+        th Name
+        th Date
+        th
+        if isUser
+          th
+      for item in items
+        tr
+          if item.status
+            td
+              img( src="img/ready.png" alt="Ready" )
+          else
+            td
+              img( src="img/unavailable.png" alt="Unavailable" )
+          if item.name
+            td= item.name
+          else
+            td
+          - date = item.date
+          - date = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()} CET`
+          td= date
+          if isUser
+            td
+              a( href=`${item.id}` )
+                p View
+          td
+            img( src="img/delete.png" )
+    if isItem && items[0].status
+        button#decrypt Decrypt
 
 block scripts
   script( src="js/status.js" )
+

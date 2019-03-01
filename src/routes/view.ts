@@ -8,10 +8,14 @@ router.get( "/new-user", ( req, res ) => res.render( "new-user", { title: "New u
 router.get( "/status",
   status.fetchItem,
   ( req, res ) => {
-    const item = req.body.item;
+    const user = req.body.user;
+    const items = req.body.items; // Set in fetchItem
 
-    if ( item ) {
-      res.render( "status", { title: "Status", item: item.id, status: item.testDate(), date: item.date, name: item.name } );
+    const isItem = req.body.isItem;
+    const isUser = req.body.isUser;
+
+    if ( items ) {
+      res.render( "status", { title: "Status", items, user, isItem, isUser } );
     } else {
       res.render( "status", { title: "Status" } );
     }
