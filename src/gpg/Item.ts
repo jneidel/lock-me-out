@@ -67,3 +67,41 @@ export class NewItem extends BaseItem {
   }
 }
 
+export class ExistingItem extends BaseItem {
+  constructor( id ) {
+    super();
+    this.id = id;
+  }
+
+  public async fetch() {
+    let data = await db.findItem( this.id );
+
+    if ( data.length !== 1 ) {
+      throw new Error( "Item does not exit" );
+    }
+
+    data = data[0]
+    this.date = data.date;
+    this.keyid = data.keyid;
+    this.name = data.name;
+    this.user = data.user;
+    this.encryptedValue = data.encryptedValue;
+  }
+
+  public testDate() {
+    const now = new Date();
+    return now > this.date; // now is after date
+  }
+
+  async decrypt( passphrase ) {
+    const encryptedValue = this.encryptedValue;
+
+    if ( this.testDate() ) {
+      const value = await gpg.decryptValue( encryptedValue, passphrase );
+      return value;
+    } else {
+      throw new Error( "Date has not been reached" )
+    }
+  }
+}
+
