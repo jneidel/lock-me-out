@@ -45,6 +45,10 @@ $ npm run test
 - [Open Sans](https://fonts.google.com/specimen/Open+Sans)
 - [Quantify](https://www.dafont.com/quantify.font)
 
+**Icons**
+
+- [Trash can](https://www.flaticon.com/free-icon/rubbish-bin_63260)
+
 ## License
 
 MIT © [Jonathan Neidel](https://jneidel.com)
