@@ -13,6 +13,7 @@ export async function formatItems( req, res, next ) {
       status: item.testDate(),
       date: item.date,
       name: item.name,
+      isDefault: item.default,
     } )
   }
 
