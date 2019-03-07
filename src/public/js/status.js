@@ -1,4 +1,6 @@
+const axios = require( "axios" );
 const statusIpt = document.querySelector("input");
+const decryptBtn = document.querySelector( "#decryptBtn" );
 
 statusIpt.addEventListener( "keyup", () => {
   const getStatusLink = document.querySelector( "button" ).parentNode;
@@ -10,5 +12,20 @@ statusIpt.addEventListener( "keyup", () => {
   url.search = isItem ? `?item=${value}` : `?user=${value}`;
 
   getStatusLink.href = url.href;
+} );
+
+decryptBtn.addEventListener( "click", async () => {
+  const passphrase = document.querySelector( "#decryptIpt" ) ? document.querySelector( "#decryptIpt" ).value : null;
+  const urlParams = (new URL( window.location.href )).searchParams;
+  const itemId = urlParams.get( "item" );
+
+  axios.post( "/api/status-decrypt", {
+    item: itemId,
+    passphrase,
+  } )
+    .then( res => res.data )
+    .then( data => {
+      console.log( data )
+    } );
 } );
 

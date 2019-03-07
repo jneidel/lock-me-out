@@ -1,7 +1,7 @@
 import { gpg } from "lock-me-out-api";
 const db = require( "../db" );
 import Key from "../gpg/generateKey";
-import { DEFAULT_KEYID } from "../util/secrets";
+import { DEFAULT_KEYID, DEFAULT_PASSPHRASE } from "../util/secrets";
 
 class BaseItem {
   public id: String = "";
@@ -10,7 +10,7 @@ class BaseItem {
   public name: String | null = null;
   protected user: String | null = null;
   protected encryptedValue: String | null = null;
-  protected get default() {
+  public get default() {
     return this.keyid === DEFAULT_KEYID;
   }
 }
@@ -97,11 +97,14 @@ export class ExistingItem extends BaseItem {
     return now > this.date; // now is after date
   }
 
-  async decrypt( passphrase ) {
+  async decrypt( passphrase = "" ) {
     const encryptedValue = this.encryptedValue;
+    const isDefault = this.default;
 
     if ( this.testDate() ) {
-      const value = await gpg.decryptValue( encryptedValue, passphrase );
+      const value = isDefault ?
+        await gpg.decryptValue( encryptedValue, DEFAULT_PASSPHRASE ) :
+        await gpg.decryptValue( encryptedValue, passphrase );
       return value;
     } else {
       throw new Error( "Date has not been reached" )

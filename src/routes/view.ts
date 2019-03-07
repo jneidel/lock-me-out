@@ -9,7 +9,7 @@ router.get( "/new-user", ( req, res ) => res.render( "new-user", { title: "New u
 router.get( "/status",
   ( req, res, next ) => {
     // @ts-ignore
-    req.data = {};
+    req.data = {}; // TS error: data does not exist on req
     next();
   },
   required.userMaybe,

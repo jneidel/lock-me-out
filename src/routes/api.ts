@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 const db = require( "../db" );
-import { NewItem } from "../gpg/Item";
+import { NewItem, ExistingItem } from "../gpg/Item";
 import Key from "../gpg/generateKey";
 
 router.post( "/new-item", async ( req, res ) => {
@@ -54,6 +54,23 @@ router.post( "/new-user", async ( req, res ) => {
       req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
 
     res.status( 400 ).redirect( `/new-user` );
+  }
+} );
+
+
+router.post( "/status-decrypt", async ( req, res ) => {
+  const formData = req.body;
+  const itemId: String = formData.item;
+  const passphrase: string | undefined = formData.passphrase || undefined;
+
+  try {
+    const item = new ExistingItem( itemId );
+    await item.fetch();
+    const value = await item.decrypt( passphrase );
+
+    res.json( { error: false, value } );
+  } catch( err ) {
+    res.json( { error: true } );
   }
 } );
 

@@ -46,10 +46,10 @@ block content
           td
             img#delete( src="img/delete.png" alt="Remove" )
     if isItem && items[0].status
-      form#decryptForm( method="post" action="/api/status-decrypt" )
-        if !items[0].isDefault
-          input#decryptIpt( type="text" name="passphrase" placeholder="Passphrase" )
-        button#decryptBtn( type="submit" ) Decrypt
+      form#decryptForm
+      if !items[0].isDefault
+        input#decryptIpt( type="text" name="passphrase" placeholder="Passphrase" )
+      button#decryptBtn Decrypt
 
 block scripts
   script( src="js/status.js" )
