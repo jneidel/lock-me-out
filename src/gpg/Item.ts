@@ -101,6 +101,11 @@ export class ExistingItem extends BaseItem {
     const encryptedValue = this.encryptedValue;
     const isDefault = this.default;
 
+    if ( passphrase === "" && !isDefault ) {
+      throw new Error( "Password can't be empty" );
+      return
+    }
+
     if ( this.testDate() ) {
       const value = isDefault ?
         await gpg.decryptValue( encryptedValue, DEFAULT_PASSPHRASE ) :
