@@ -14,18 +14,20 @@ statusIpt.addEventListener( "keyup", () => {
   getStatusLink.href = url.href;
 } );
 
-decryptBtn.addEventListener( "click", async () => {
-  const passphrase = document.querySelector( "#decryptIpt" ) ? document.querySelector( "#decryptIpt" ).value : null;
-  const urlParams = (new URL( window.location.href )).searchParams;
-  const itemId = urlParams.get( "item" );
+try { // Not available in DefaultView and UserView
+  decryptBtn.addEventListener( "click", async () => {
+    const passphrase = document.querySelector( "#decryptIpt" ) ? document.querySelector( "#decryptIpt" ).value : null;
+    const urlParams = (new URL( window.location.href )).searchParams;
+    const itemId = urlParams.get( "item" );
 
-  axios.post( "/api/status-decrypt", {
-    item: itemId,
-    passphrase,
-  } )
-    .then( res => res.data )
-    .then( data => {
-      console.log( data )
-    } );
-} );
+    axios.post( "/api/status-decrypt", {
+      item: itemId,
+      passphrase,
+    } )
+      .then( res => res.data )
+      .then( data => {
+        console.log( data )
+      } );
+  } );
+} catch( err ) {}
 
