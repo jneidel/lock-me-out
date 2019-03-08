@@ -11,7 +11,7 @@ const notEmpty = x => x !== "";
 const schema = new mongoose.Schema( {
   id: {
     type   : String,
-    default: uuid(),
+    default: () => uuid(),
     unique : true,
   },
   date: {

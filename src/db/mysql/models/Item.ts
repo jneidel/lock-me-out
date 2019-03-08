@@ -9,7 +9,7 @@ export default function createItem( sequelize, DataTypes ): {} {
   return sequelize.define( "Item", {
     id: {
       type        : DataTypes.STRING,
-      defaultValue: uuid(),
+      defaultValue: () => uuid(),
       primaryKey  : true,
       allowNull   : false,
       validate    : {
