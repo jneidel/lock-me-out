@@ -14,6 +14,25 @@ statusIpt.addEventListener( "keyup", () => {
   getStatusLink.href = url.href;
 } );
 
+function createTextArea() {
+  const decryptTable = document.querySelector( "table" );
+  const decryptArea = document.createElement( "textarea" );
+  decryptArea.id = "decryptArea";
+  decryptArea.readOnly = true;
+
+  decryptTable.appendChild( decryptArea );
+  return decryptArea;
+}
+function getTextArea() {
+  let decryptArea = document.querySelector( "#decryptArea" );
+
+  if ( decryptArea === null ) {
+    decryptArea = createTextArea();
+  }
+
+  return decryptArea;
+}
+
 try { // Not available in DefaultView and UserView
   decryptBtn.addEventListener( "click", async () => {
     const passphrase = document.querySelector( "#decryptIpt" ) ? document.querySelector( "#decryptIpt" ).value : null;
@@ -26,7 +45,8 @@ try { // Not available in DefaultView and UserView
     } )
       .then( res => res.data )
       .then( data => {
-        console.log( data )
+        const decryptArea = getTextArea();
+        decryptArea.innerText = data.error ? data.msg : data.value;
       } );
   } );
 } catch( err ) {}

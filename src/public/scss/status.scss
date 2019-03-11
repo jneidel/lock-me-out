@@ -15,6 +15,10 @@ a {
 // Table styles
 table {
   border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 td:not(:last-child), th:not(:last-child) {
   padding-right: 20px;
@@ -29,5 +33,15 @@ td {
   p { // Reset UserViews: p View
     margin: 0;
   }
+}
+
+// Decrypt text area
+#decryptArea {
+  background: none;
+  // button width = 272
+  // area padding + border = 6
+  width: 266px;
+  height: 50px;
+  margin-top: 20px;
 }
 

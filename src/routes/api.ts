@@ -70,7 +70,7 @@ router.post( "/status-decrypt", async ( req, res ) => {
 
     res.json( { error: false, value } );
   } catch( err ) {
-    res.json( { error: true } );
+    res.json( { error: true, msg: err.message } );
   }
 } );
 
