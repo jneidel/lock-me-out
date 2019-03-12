@@ -1,11 +1,10 @@
-# WORK IN PROGRESS - lock-me-out
-
-<h2 align="center">
-    <img src="img/logo.png" alt="lock-me-out">
-</h2>
+<h1 align="center">
+    <img src="img/logo.png" alt="Lock Me Out">
+</h1>
 
 > Temporarily lock yourself out of a service by encrypting e.g. your netflix password for a week
 
+![](https://img.shields.io/badge/status-work%20in%20progress-orange.svg?style=flat-square)
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://github.com/jneidel/lock-me-out/blob/master/license)
 
 <!--[![Github Release](https://img.shields.io/github/release/jneidel/lock-me-out/all.svg?style=flat-square)](https://github.com/jneidel/lock-me-out/releases)-->
