@@ -55,9 +55,6 @@ h1 {
 
 #header a {
   color: $white;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: border 0.3s ease;
   cursor: pointer;
   text-decoration: none;
 }
@@ -71,10 +68,10 @@ h1 {
 
 // Logo
 #logo {
-  margin: 0;
+  margin: -2px 0 0 0;
 
   font-family: $f-logo;
-  font-size: 3.2rem;
+  font-size: $fs-logo;
   height: 43px;
 }
 
