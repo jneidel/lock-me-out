@@ -15,7 +15,8 @@ body {
     "header header header"
     ". main ."
     ". footer .";
-  background-image: linear-gradient( 26deg, $blue, $green );
+  // colors based on https://colorhunt.co/palette/108152
+  background-image: linear-gradient( 26deg, #e61c5d, #ffbd39 );
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
