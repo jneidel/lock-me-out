@@ -84,6 +84,10 @@ h1 {
 #nav-right {
   display: flex;
   padding: 0 25px;
+
+  p {
+    margin: 20px 0 0 0;
+  }
 }
 .nav-container {
   padding-top: 20px;
@@ -91,9 +95,6 @@ h1 {
 }
 #nav-link-register {
   margin-right: 15px;
-}
-.nav-username {
-  margin: 0;
 }
 
 // Flashes
