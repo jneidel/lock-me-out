@@ -49,6 +49,9 @@ $ npm run test
 - [Trash can](https://www.flaticon.com/free-icon/backspace-arrow_61167)
 - [Check](https://www.flaticon.com/free-icon/checked_128384)
 - [Cross](https://www.flaticon.com/free-icon/cancel_128397)
+- [Lock closed](https://www.flaticon.com/free-icon/padlock_159435)
+- [Lock open](https://www.flaticon.com/free-icon/padlock_159457)
+- [Github](https://www.flaticon.com/free-icon/github-logo_25231)
 
 ## License
 

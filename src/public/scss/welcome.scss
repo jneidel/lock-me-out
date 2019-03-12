@@ -1,8 +1,66 @@
-body {
-  min-height: 100vh;
-  margin: 0;
+@import "_vars.scss";
 
+#content, #inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+}
+
+// button styles
+.inline-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.button--get-started {
+  grid-area: button;
+  align-self: center;
+  color: $black;
+  background: $white;
+  box-shadow: 0 4px 10px 1px rgba( $black, 0.2 );
+  font-size: 1.125rem;
+  border-radius: 30px;
+  transition: all .3s;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 17px 22px;
+  text-align: center;
+
+  &:hover {
+    box-shadow: 0 14px 25px 1px rgba( $black, 0.3 );
+    transform: translateY( -2px );
+  }
+
+  // Button content
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a, img {
+    $dimensions: 24px;
+    width: $dimensions;
+    height: $dimensions;
+  }
+
+  p {
+    margin: 0;
+    padding-left: 8px;
+  }
+
+  &:nth-of-type(1) {
+    margin-right: 25px; // Between buttons
+  }
+}
+
+#source {
+  margin-top: 25px;
 }

@@ -4,10 +4,16 @@ block styles
   link( rel="stylesheet" type="text/css" href="css/welcome.css" )
 
 block content
-  h1 lock-me-out
-  a( href="login" ) Login
-  br
-  a( href="register" ) Register
-
+  h1 Lock Me Out
+  .inline-items
+    a( href="/new" ).button--get-started
+      img( src="img/lock-closed.svg" )
+      p Lock item
+    a( href="/status" ).button--get-started
+      img( src="img/lock-open.svg" )
+      p Unlock item
+  a#source( href="https://github.com/jneidel/lock-me-out" ).button--get-started
+    img( src="img/github.svg" )
+    p Source
 block scripts
   script( src="js/welcome.js" )
