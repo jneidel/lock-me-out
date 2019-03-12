@@ -70,6 +70,10 @@ router.post( "/status-decrypt", async ( req, res ) => {
 
     res.json( { error: false, value } );
   } catch( err ) {
+    if ( err.message.match( /Bad passphrase/ ) ) {
+      err.message = "Incorrect passphrase.";
+    }
+
     res.json( { error: true, msg: err.message } );
   }
 } );

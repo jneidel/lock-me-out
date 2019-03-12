@@ -48,7 +48,7 @@ block content
     if isItem && items[0].status
       form#decryptForm
       if !items[0].isDefault
-        input#decryptIpt( type="text" name="passphrase" placeholder="Passphrase" )
+        input#decryptIpt( type="password" name="passphrase" placeholder="Passphrase" )
       button#decryptBtn Decrypt
 
 block scripts
