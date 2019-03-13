@@ -1,6 +1,6 @@
-<h1 align="center">
+<p align="center">
     <img src="media/logo.png" alt="Lock Me Out">
-</h1>
+</p>
 
 > Temporarily lock yourself out of a service by encrypting e.g. your netflix password for a week
 
