@@ -17,6 +17,7 @@ export async function userMaybe( req, res, next ) {
 
       req.data.userId = userId;
       req.data.isUser = true;
+      req.body.cookieUser = userId; // set as cookie
     } catch( err ) {
       if ( err.message === "User does not exist" ) {
         req.flash( "error", "User does not exist. Plase enter a valid username." );

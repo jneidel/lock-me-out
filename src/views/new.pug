@@ -18,14 +18,14 @@ block content
       - const time = `${prefixZero( now.getHours() )}:${prefixZero( now.getMinutes() )}`
       input.first( type="date" name="date" value=`${date}` required )
       input.second( type="time" name="time" value=`${time}` required )
+    - const userValue = user ? user : cookieUser ? cookieUser : "";
     label( for="user" ) <span class="required -info">optional</span> User to associate this item with
     span.half-input
-      - const userValue = user ? user : "";
       input.first( type="text" name="user" value=`${userValue}` )
       a( href="/new-user" )
         button.second( form="none" ) New user
     label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
-    - const passphraseDisabled = !!user;
+    - const passphraseDisabled = userValue !== "";
     if passphraseDisabled
       input( type="password" name="passphrase" disabled placeholder="The users passphrase" )
     else

@@ -102,6 +102,8 @@ Items can be permanently removed on the [status page](https://lmo.jneidel.com/st
 
 There is no logging.
 
+Cookies only keep a link to the user in the top right corner.
+
 ## License
 
 MIT © [Jonathan Neidel](https://jneidel.com)
