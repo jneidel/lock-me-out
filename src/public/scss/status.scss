@@ -3,13 +3,18 @@
 #decryptForm {
   margin-top: 25px;
 }
-#delete {
-  cursor: pointer;
-}
 
 a {
   text-decoration: none;
   color: $black;
+}
+
+img { // Turn black icons into white
+  filter: invert(100%);
+}
+#delete { // Turn black delete into grey
+  filter: invert(20%);
+  cursor: pointer;
 }
 
 // Table styles

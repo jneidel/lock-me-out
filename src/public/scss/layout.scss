@@ -33,6 +33,10 @@ h1 {
   grid-area: main;
 }
 
+::-webkit-input-placeholder { // Fix placeholder color in chrome
+  color: $black;
+}
+
 /*
   Header
 
@@ -124,3 +128,4 @@ h1 {
     margin: 0;
   }
 }
+
