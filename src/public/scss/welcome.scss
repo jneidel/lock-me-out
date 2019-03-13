@@ -12,6 +12,9 @@ a {
   text-decoration: none;
   color: $black;
 }
+p {
+  text-align: center;
+}
 
 // button styles
 .inline-items {
@@ -19,6 +22,9 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 .button--get-started {
