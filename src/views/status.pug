@@ -14,8 +14,11 @@ block content
   if isItem
     h2 Item Info:
   if isUser
-    h2 Items:
-  if isItem || isUser
+    if items[0]
+      h2 Items:
+    else
+      h2 There are no items
+  if isItem || isUser && items[0]
     table
       tr
         th Status
