@@ -22,8 +22,7 @@ block content
         th Name
         th Date
         th
-        if isUser
-          th
+        th
       for item in items
         tr
           if item.status
@@ -43,8 +42,9 @@ block content
             td
               a( href=`/status?item=${item.id}` )
                 p View
-          td
-            img#delete( src="img/delete.png" alt="Remove" )
+          if isItem
+            td
+              img#delete( src="img/delete.png" alt="Remove" )
     if isItem && items[0].status
       form#decryptForm
       if !items[0].isDefault

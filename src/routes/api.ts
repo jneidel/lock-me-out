@@ -78,6 +78,19 @@ router.post( "/status-decrypt", async ( req, res ) => {
   }
 } );
 
+router.post( "/remove-item", async ( req, res ) => {
+  const itemId: String = req.body.item;
+
+  try {
+    await db.removeItem( itemId );
+
+    res.json( { error: false } );
+  } catch( err ) {
+    console.log( err )
+    res.json( { error: true, msg: err.message } );
+  }
+} );
+
 // GET redirect
 router.get( "/", ( req, res ) => {
   req.flash( "error", "Access to the API denied." );
