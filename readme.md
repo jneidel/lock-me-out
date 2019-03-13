@@ -26,7 +26,7 @@
 
 GnuPG is required for the encryption of items.
 
-See [jneidel/lock-me-out-api](https://github.com/jneidel/lock-me-out-api/blob/master/bin/install-gpg.sh) for a gpg install script.
+See [lock-me-out-cli](https://github.com/jneidel/lock-me-out-cli/blob/master/bin/install-gpg.sh) for a gpg install script.
 
 Once installed you can test if gpg is working as intended with: `npm run test gpg`
 
@@ -52,6 +52,11 @@ $ npm run test
 - [Lock closed](https://www.flaticon.com/free-icon/padlock_159435)
 - [Lock open](https://www.flaticon.com/free-icon/padlock_159457)
 - [Github](https://www.flaticon.com/free-icon/github-logo_25231)
+
+## Related
+
+- [jneidel/lock-me-out-cli](https://github.com/jneidel/lock-me-out-cli): CLI of this module
+- [jneidel/lock-me-out-api](https://github.com/jneidel/lock-me-out-api): API for this module
 
 ## License
 
