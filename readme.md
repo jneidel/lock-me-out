@@ -22,6 +22,19 @@ For example: if you need to focus on your studies the upcoming week, you could t
 - Generate own encryption key
 - Secure encryption using [GPG](https://gnupg.org/)
 
+## Screenshots
+
+<p align="center">
+  <img src="img/new.png" height="395px" alt="new item">
+  <p align="center">Create a new item</p>
+</p>
+<br>
+<p align="center">
+  <img src="img/status.png" height="395px" alt"item status">
+  <p align="center">Decrypt the created item</p>
+</p>
+
+
 ## Usage
 
 - [new item](https://lmo.jneidel.com/new) - Create a new item
