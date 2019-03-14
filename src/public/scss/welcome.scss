@@ -26,6 +26,10 @@ p {
 
   margin-top: 10px;
   margin-bottom: 25px;
+
+  img {
+    filter: invert(20%); // Turn back locks into grey
+  }
 }
 
 .button--get-started {
