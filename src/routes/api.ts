@@ -1,95 +1,81 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 const router = Router();
 const db = require( "../db" );
 import { NewItem, ExistingItem } from "../gpg/Item";
 import Key from "../gpg/generateKey";
 
-router.post( "/new-item", async ( req, res ) => {
+/* Generic asyc error handler
+ * err.message should be set in the responsible module (db for db errors, etc)
+ */
+function errorHandlerGenerator(
+  fn: ( Request, Response ) => Promise<void>,
+  fail //: { redirect: String } | { json: Boolean } // this type does not work
+) {
+  return async ( req: Request, res: Response ) => {
+    fn( req, res ).catch( err => {
+      req.flash( "error", err.message );
+
+      if ( fail.json )
+        res.json( { error: true, msg: err.message } );
+      else
+        res.status( 400 ).redirect( fail.redirect );
+    } )
+  }
+}
+
+const newItemHandler = errorHandlerGenerator( async ( req, res ) => {
   const formData = req.body;
   const passphrase = formData.passphrase;
   const value = formData.value;
 
   const item = new NewItem( formData );
-  try {
-    await item.userItem(); // Get keyid from user
-    await item.create();
-    await item.anonItem( passphrase ); // Create new key if no user
-    await item.encrypt( value, passphrase );
+  await item.userItem(); // Get keyid from user
+  await item.create();
+  await item.anonItem( passphrase ); // Create new key if no user
+  await item.encrypt( value, passphrase );
 
-    req.flash( "info", "Item successfully created. The item-id below is needed for decryption." );
-    res.status( 200 ).redirect( `/status?item=${item.id}` );
-  } catch ( err ) { // Using .catch express throws because 2x res.redirect
-    console.error( "Error thrown:", err );
+  req.flash( "info", "Item successfully created. The item-id below is needed for decryption." );
+  res.status( 200 ).redirect( `/status?item=${item.id}` );
+}, { redirect: "/new" );
 
-    if ( err.message === "User not found" )
-      req.flash( "error", "Username does not exists. Please create it before assigning any items." );
-    else
-      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-
-    res.status( 400 ).redirect( `/new` );
-  }
-} );
-
-router.post( "/new-user", async ( req, res ) => {
+const newUserHandler = errorHandlerGenerator( async ( req, res ) => {
   const formData = req.body;
   const data = { // Prepare data for database
     id: formData.username,
   };
 
-  try {
-    const userId = await db.createUser( data );
-    const key = new Key( "User" );
-    await key.generate( formData.passphrase, userId );
+  const userId = await db.createUser( data )
+  const key = new Key( "User" );
+  await key.generate( formData.passphrase, userId );
 
-    req.flash( "info", "User successfully created." );
-    res.status( 200 ).redirect( `/new?user=${userId}` );
-  } catch ( err ) { // Using .catch express throws because 2x res.redirect
-    console.error( "Error thrown:", err );
+  req.flash( "info", "User successfully created." );
+  res.status( 200 ).redirect( `/new?user=${userId}` );
+}, { redirect: "/new-user" } );
 
-    if ( err._message === "users validation failed" )
-      req.flash( "error", "Username is prohibited from usage." );
-    else if ( err.errmsg.startsWith( "E11000 duplicate key error collection" ) )
-      req.flash( "error", "Username already in use." );
-    else
-      req.flash( "error", "Database insertion error. Invalid data in submitted form, please retry." );
-
-    res.status( 400 ).redirect( `/new-user` );
-  }
-} );
-
-
-router.post( "/status-decrypt", async ( req, res ) => {
+const statusDecryptHandler = errorHandlerGenerator( async ( req, res ) => {
   const formData = req.body;
   const itemId: String = formData.item;
   const passphrase: string | undefined = formData.passphrase || undefined;
 
-  try {
-    const item = new ExistingItem( itemId );
-    await item.fetch();
-    const value = await item.decrypt( passphrase );
+  const item = new ExistingItem( itemId );
+  await item.fetch();
+  const value = await item.decrypt( passphrase );
 
-    res.json( { error: false, value } );
-  } catch( err ) {
-    if ( err.message.match( /Bad passphrase/ ) ) {
-      err.message = "Incorrect passphrase.";
-    }
+  res.json( { error: false, value } );
+}, { json: true } );
 
-    res.json( { error: true, msg: err.message } );
-  }
-} );
-
-router.post( "/remove-item", async ( req, res ) => {
+const removeItemHandler = errorHandlerGenerator( async ( req, res ) => {
   const itemId: String = req.body.item;
 
-  try {
-    await db.removeItem( itemId );
+  await db.removeItem( itemId );
 
-    res.json( { error: false } );
-  } catch( err ) {
-    console.log( err )
-    res.json( { error: true, msg: err.message } );
-  }
-} );
+  res.json( { error: false } );
+}, { json: true } );
+
+router.post( "/new-item", newItemHandler );
+router.post( "/new-user", newUserHandler );
+router.post( "/status-decrypt", statusDecryptHandler );
+router.post( "/remove-item", removeItemHandler );
 
 // GET redirect
 router.get( "/", ( req, res ) => {

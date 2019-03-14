@@ -29,7 +29,7 @@ export class NewItem extends BaseItem {
     if ( user !== null ) {
       const res = await db.findUser( user ); // [ { id } ] or []
       if ( res.length === 0 ) // User not found
-        throw new Error( "User not found" );
+        throw new Error( "Username does not exists. Please create it before assigning any items." );
       else
         this.keyid = res[0].keyid;
     }
@@ -107,10 +107,17 @@ export class ExistingItem extends BaseItem {
     }
 
     if ( this.testDate() ) {
-      const value = isDefault ?
-        await gpg.decryptValue( encryptedValue, DEFAULT_PASSPHRASE ) :
-        await gpg.decryptValue( encryptedValue, passphrase );
-      return value;
+      try {
+        const value = isDefault ?
+          await gpg.decryptValue( encryptedValue, DEFAULT_PASSPHRASE ) :
+          await gpg.decryptValue( encryptedValue, passphrase );
+        return value;
+      } catch( err ) {
+        if ( err.message.match( /Bad passphrase/ ) ) {
+          err.message = "Incorrect passphrase";
+        }
+        throw err;
+      }
     } else {
       throw new Error( "Date has not been reached" )
     }
