@@ -5,18 +5,24 @@ import { DEFAULT_KEYID, DEFAULT_PASSPHRASE } from "../util/secrets";
 
 class BaseItem {
   public id: String = "";
+
   public date: Date = new Date();
+
   protected keyid: String | undefined = DEFAULT_KEYID;
+
   public name: String | null = null;
+
   protected user: String | null = null;
+
   protected encryptedValue: String | null = null;
+
   public get default() {
     return this.keyid === DEFAULT_KEYID;
   }
 }
 
 export class NewItem extends BaseItem {
-  constructor( data: { date, time, name, user } ) {
+  constructor( data: { date; time; name; user } ) {
     super();
     this.date = new Date( `${data.date}T${data.time}` );
     this.name = data.name !== "" ? data.name : null;
@@ -72,19 +78,17 @@ export class ExistingItem extends BaseItem {
     super();
     this.id = id;
 
-    for ( const prop in data ) {
+    for ( const prop in data )
       this[prop] = data[prop];
-    }
   }
 
   public async fetch() {
     let data = await db.findItem( this.id );
 
-    if ( data.length !== 1 ) {
+    if ( data.length !== 1 )
       throw new Error( "Item does not exit" );
-    }
 
-    data = data[0]
+    data = data[0];
     this.date = data.date;
     this.keyid = data.keyid;
     this.name = data.name;
@@ -94,17 +98,15 @@ export class ExistingItem extends BaseItem {
 
   public testDate() {
     const now = new Date();
-    return now > this.date; // now is after date
+    return now > this.date; // Now is after date
   }
 
   async decrypt( passphrase = "" ) {
     const encryptedValue = this.encryptedValue;
     const isDefault = this.default;
 
-    if ( passphrase === "" && !isDefault ) {
+    if ( passphrase === "" && !isDefault )
       throw new Error( "Password can't be empty" );
-      return
-    }
 
     if ( this.testDate() ) {
       try {
@@ -112,14 +114,14 @@ export class ExistingItem extends BaseItem {
           await gpg.decryptValue( encryptedValue, DEFAULT_PASSPHRASE ) :
           await gpg.decryptValue( encryptedValue, passphrase );
         return value;
-      } catch( err ) {
-        if ( err.message.match( /Bad passphrase/ ) ) {
+      } catch ( err ) {
+        if ( err.message.match( /Bad passphrase/ ) )
           err.message = "Incorrect passphrase";
-        }
+
         throw err;
       }
     } else {
-      throw new Error( "Date has not been reached" )
+      throw new Error( "Date has not been reached" );
     }
   }
 }

@@ -8,6 +8,7 @@ const filterResources = ( req: any ) => {
     const url = req.url || req.originalUrl;
     return url.slice( 0, 4 ) === "/js/" || url.slice( 0, 5 ) === "/css/" || url.slice( 0, 5 ) === "/img/" || url.slice( 0, 12 ) === "/favicon.ico";
   }
+
   return true;
 };
 

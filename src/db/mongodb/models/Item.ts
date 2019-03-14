@@ -44,7 +44,7 @@ const schema = new mongoose.Schema( {
     type    : String,
     default : null,
     validate: notEmpty,
-  }
+  },
 } );
 
 export default mongoose.model( "items", schema );

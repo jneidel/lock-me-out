@@ -9,7 +9,7 @@ import Key from "../gpg/generateKey";
  */
 function errorHandlerGenerator(
   fn: ( Request, Response ) => Promise<void>,
-  fail //: { redirect: String } | { json: Boolean } // this type does not work
+  fail // : { redirect: String } | { json: Boolean } // this type does not work
 ) {
   return async ( req: Request, res: Response ) => {
     fn( req, res ).catch( err => {
@@ -19,8 +19,8 @@ function errorHandlerGenerator(
         res.json( { error: true, msg: err.message } );
       else
         res.status( 400 ).redirect( fail.redirect );
-    } )
-  }
+    } );
+  };
 }
 
 const newItemHandler = errorHandlerGenerator( async ( req, res ) => {
@@ -36,7 +36,7 @@ const newItemHandler = errorHandlerGenerator( async ( req, res ) => {
 
   req.flash( "info", "Item successfully created. The item-id below is needed for decryption." );
   res.status( 200 ).redirect( `/status?item=${item.id}` );
-}, { redirect: "/new" );
+}, { redirect: "/new" } );
 
 const newUserHandler = errorHandlerGenerator( async ( req, res ) => {
   const formData = req.body;
@@ -44,7 +44,7 @@ const newUserHandler = errorHandlerGenerator( async ( req, res ) => {
     id: formData.username,
   };
 
-  const userId = await db.createUser( data )
+  const userId = await db.createUser( data );
   const key = new Key( "User" );
   await key.generate( formData.passphrase, userId );
 

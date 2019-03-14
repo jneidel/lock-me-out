@@ -9,12 +9,12 @@ export async function formatItems( req, res, next ) {
   const items: object[] = [];
   function addItem( item ) {
     items.push( {
-      id: item.id,
-      status: item.testDate(),
-      date: item.date,
-      name: item.name,
+      id       : item.id,
+      status   : item.testDate(),
+      date     : item.date,
+      name     : item.name,
       isDefault: item.default,
-    } )
+    } );
   }
 
   if ( isItem ) {

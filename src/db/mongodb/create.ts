@@ -30,6 +30,6 @@ export function createUser( data: UserData ): Promise<String> {
         err.message = "Database insertion error. Invalid data in submitted form, please retry.";
 
       throw err;
-    } )
+    } );
 }
 

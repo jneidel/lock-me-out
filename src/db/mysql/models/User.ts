@@ -4,10 +4,10 @@ import { DEFAULT_KEYID } from "../../../util/secrets";
 export default function createItem( sequelize, DataTypes ): {} {
   return sequelize.define( "User", {
     id: {
-      type        : DataTypes.STRING,
-      primaryKey  : true,
-      allowNull   : false,
-      validate    : {
+      type      : DataTypes.STRING,
+      primaryKey: true,
+      allowNull : false,
+      validate  : {
         notIn: [ reservedUsernames ],
       },
     },

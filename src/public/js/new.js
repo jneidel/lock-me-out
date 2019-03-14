@@ -5,12 +5,14 @@ function disablePassphrase( el ) {
   el.disabled = false;
   el.placeholder = "";
 }
+
 function enablePassphrase( el ) {
   if ( !el.disabled ) {
     el.disabled = true;
     el.placeholder = "The users passphrase";
   }
 }
+
 function passphraseEvent() {
   const { value: user } = userIpt;
 

@@ -9,21 +9,19 @@ export async function userMaybe( req, res, next ) {
 
   if ( userId ) {
     try {
-      let user = await db.findUser( userId );
+      const user = await db.findUser( userId );
 
-      if ( user.length !== 1 ) {
+      if ( user.length !== 1 )
         throw new Error( "User does not exist" );
-      }
 
       req.data.userId = userId;
       req.data.isUser = true;
-      req.body.cookieUser = userId; // set as cookie
-    } catch( err ) {
-      if ( err.message === "User does not exist" ) {
+      req.body.cookieUser = userId; // Set as cookie
+    } catch ( err ) {
+      if ( err.message === "User does not exist" )
         req.flash( "error", "User does not exist. Plase enter a valid username." );
-      } else {
+      else
         req.flash( "error", "There was an error getting your user." );
-      }
 
       res.status( 400 ).redirect( `/status` );
     }
@@ -42,12 +40,11 @@ export async function itemMaybe( req, res, next ) {
 
       req.data.item = item;
       req.data.isItem = true;
-    } catch( err ) {
-      if ( err.message === "Item does not exit" ) {
+    } catch ( err ) {
+      if ( err.message === "Item does not exit" )
         req.flash( "error", "Item does not exit. Please enter a valid item id." );
-      } else {
+      else
         req.flash( "error", "There was an error getting your item." );
-      }
 
       res.status( 400 ).redirect( `/status` );
     }

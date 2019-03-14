@@ -51,10 +51,10 @@ export default function createItem( sequelize, DataTypes ): {} {
       type        : DataTypes.STRING,
       defaultValue: null,
       allowNull   : true,
-      validate: {
+      validate    : {
         notEmpty: true,
-      }
-    }
+      },
+    },
   }, {
     tableName: "items",
     indexes  : [

@@ -1,5 +1,5 @@
 const axios = require( "axios" );
-const statusIpt = document.querySelector("input");
+const statusIpt = document.querySelector( "input" );
 const decryptBtn = document.querySelector( "#decryptBtn" );
 const deleteLink = document.querySelector( "#delete" );
 
@@ -23,26 +23,26 @@ function createTextArea() {
   decryptArea.id = "decryptArea";
   decryptArea.readOnly = true;
 
-  decryptTable.appendChild( decryptArea );
+  decryptTable.append( decryptArea );
   return decryptArea;
 }
+
 function getTextArea() {
   let decryptArea = document.querySelector( "#decryptArea" );
 
-  if ( decryptArea === null ) {
+  if ( decryptArea === null )
     decryptArea = createTextArea();
-  }
 
   return decryptArea;
 }
 
 // Get item id from the url
 function getItemId() {
-  const urlParams = (new URL( window.location.href )).searchParams;
+  const urlParams = ( new URL( window.location.href ) ).searchParams;
   return urlParams.get( "item" );
 }
 
-// isItem view only
+// IsItem view only
 try {
   decryptBtn.addEventListener( "click", async () => {
     const passphrase = document.querySelector( "#decryptIpt" ) ? document.querySelector( "#decryptIpt" ).value : null;
@@ -70,9 +70,9 @@ try {
           const url = String( window.location.href ).match( /([^\?]+)/ )[1];
           window.location = url;
         } else {
-          console.log( "Removal error:", data.msg )
+          console.log( "Removal error:", data.msg );
         }
       } );
   } );
-} catch( err ) {}
+} catch ( err ) {}
 

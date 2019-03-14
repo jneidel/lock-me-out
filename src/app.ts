@@ -29,7 +29,7 @@ app.use( session( {
   cookie           : {
     maxAge  : 1000 * 60 * 60 * 24 * 30, // 30 days
     httpOnly: true,
-    secure  : false, // false for localhost
+    secure  : false, // False for localhost
   },
 } ) );
 app.use( flash() );

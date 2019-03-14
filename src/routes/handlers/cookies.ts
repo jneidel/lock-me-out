@@ -1,8 +1,10 @@
 class CookieUser {
   private user: String | null = null;
+
   constructor( user ) {
     this.user = user ? user : null;
   }
+
   setRes( res ) {
     const user = this.user;
 
@@ -12,6 +14,7 @@ class CookieUser {
       secure  : false,
     } );
   }
+
   setReq( req ) {
     const user = this.user;
 
@@ -20,20 +23,20 @@ class CookieUser {
 }
 
 /*
- * cookie -> req.body.cookieUser
+ * Cookie -> req.body.cookieUser
  */
 export function getUser( req, res, next ) {
   try {
     const userId = req.headers.cookie.match( /user=([^\;]+)/ )[1];
-    const user = new CookieUser( userId ); // throws if req.cookies = undefined
+    const user = new CookieUser( userId ); // Throws if req.cookies = undefined
     user.setReq( req );
-  } catch( err ) {}
+  } catch ( err ) {}
 
   next();
 }
 
 /*
- * req.body.cookieUser -> cookie
+ * Req.body.cookieUser -> cookie
  */
 export function setUser( req, res, next ) {
   const user = new CookieUser( req.body.cookieUser );

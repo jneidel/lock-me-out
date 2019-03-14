@@ -14,7 +14,7 @@ router.get( "/new",
 );
 router.get( "/new-user",
   cookies.getUser,
-  ( req, res ) => res.render( "new-user", { title: "New user", cookieUser: req.body.cookieUser,  user: req.query.user } )
+  ( req, res ) => res.render( "new-user", { title: "New user", cookieUser: req.body.cookieUser, user: req.query.user } )
 );
 router.get( "/status",
   cookies.getUser,
