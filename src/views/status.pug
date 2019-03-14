@@ -4,10 +4,11 @@ block styles
   link( rel="stylesheet" type="text/css" href="css/status.css" )
 
 block content
-  h1 Locked item status
-  label( for="status" ) Get the status of an encrypted item by entering its code:
+  h1 Item & User status
+  p Get the item or user status by entering their identifier
+  label( for="status" ) <span class="required -error">required</span> Item-id or Username
   - const inputValue = isItem ? items[0].id : user ? user : "";
-  input( type="text" name="status" value=`${inputValue}` )
+  input( type="text" name="status" value=`${inputValue}` required )
   - const statusLink = inputValue !== "" ? isItem ? `/status?item=${inputValue}` : `/status?user=${inputValue}` : "/status";
   a( href=`${statusLink}` )
     button Get Status
@@ -44,7 +45,7 @@ block content
           if isUser
             td
               a( href=`/status?item=${item.id}` )
-                p View
+                img.redirect( src="img/redirect.png" )
           if isItem
             td
               img#delete( src="img/delete.png" alt="Remove" )

@@ -8,14 +8,22 @@ a {
   text-decoration: none;
   color: $black;
 }
+p {
+  font-size: $fs-bigger-text;
+  margin-top: 0;
+}
 
 img { // Turn black icons into white
   filter: invert(100%);
 }
 #delete { // Turn black delete into grey
-  filter: invert(20%);
+  filter: invert(30%);
   cursor: pointer;
 }
+.redirect { // Turn black redirect into grey
+  filter: invert(15%);
+}
+
 
 // Table styles
 table {
@@ -49,4 +57,32 @@ td {
   height: 50px;
   margin-top: 20px;
 }
+
+// Optional label
+.-error {
+  background: $red;
+  color: $white;
+}
+.-warn {
+  background: $yellow;
+  color: $black;
+}
+.-info {
+  background: $green;
+  color: $black;
+}
+
+.required {
+  padding: 2px 5px;
+  font-size: $fs-small;
+  margin-right: 5px;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -10px;
+}
+
 

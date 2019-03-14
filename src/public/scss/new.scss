@@ -2,6 +2,11 @@
 
 a {
   text-decoration: none;
+  color: $black;
+}
+p {
+  font-size: $fs-bigger-text;
+  margin-top: 0;
 }
 
 form {

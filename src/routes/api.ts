@@ -16,7 +16,7 @@ router.post( "/new-item", async ( req, res ) => {
     await item.anonItem( passphrase ); // Create new key if no user
     await item.encrypt( value, passphrase );
 
-    req.flash( "info", "Item successfully created." );
+    req.flash( "info", "Item successfully created. The item-id below is needed for decryption." );
     res.status( 200 ).redirect( `/status?item=${item.id}` );
   } catch ( err ) { // Using .catch express throws because 2x res.redirect
     console.error( "Error thrown:", err );

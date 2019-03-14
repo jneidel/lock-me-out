@@ -8,9 +8,9 @@ block content
   form( method="post" action="/api/new-item" )
     label( for="name" ) <span class="required -info">optional</span> Name of the item
     input( type="text" name="name" autofocus )
-    label( for="value" ) <span class="required -error">required</span> Value to be encrypted; The item you want to lock away
+    label( for="value" ) <span class="required -error">required</span> Value to be encrypted; The string you want to lock away
     input( type="text" name="value" required )
-    label( for="date" ) <span class="required -error">required</span> End date (your encrypted value will not be accessible before this date)
+    label( for="date" ) <span class="required -error">required</span> Date; The value above will not be accessible before this date
     span.half-input
       - const now = new Date();
       - const prefixZero = str => String( str ).length === 1 ? `0${str}` : str;
@@ -24,7 +24,7 @@ block content
       input.first( type="text" name="user" value=`${userValue}` )
       a( href="/new-user" )
         button.second( form="none" ) New user
-    label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with
+    label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with (<a href="https://github.com/jneidel/lock-me-out#how-it-works">more info</a>)
     - const passphraseDisabled = userValue !== "";
     if passphraseDisabled
       input( type="password" name="passphrase" disabled placeholder="The users passphrase" )

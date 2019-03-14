@@ -96,6 +96,7 @@ $ npm run test
 - [Lock closed](https://www.flaticon.com/free-icon/padlock_159435)
 - [Lock open](https://www.flaticon.com/free-icon/padlock_159457)
 - [Github](https://www.flaticon.com/free-icon/github-logo_25231)
+- [Redirect](https://www.flaticon.com/free-icon/external-link_106900)
 
 ## Privacy Policy
 
