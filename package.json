@@ -27,7 +27,7 @@
     "watch-webpack": "webpack -w",
     "watch-test": "jest --watch",
     "watch-unit": "jest --watch test/unit/**/*.test.ts",
-    "start-prod": "node -r dotenv/config app.js dotenv_config_path=vars.env",
+    "start-prod": "node -r dotenv/config dist/app.js dotenv_config_path=.env",
     "lint": "npm run -s lint-ts && npm run -s lint-js",
     "lint-ts": "eslint --fix -c ~/.eslintrc-ts --ext .ts --parser-options \"{ 'ecmaVersion': 10, 'ecmaFeatures': { 'impliedStrict': true }, project: ./tsconfig.json }\" src",
     "lint-js": "eslint --fix --ext .js src/public"
