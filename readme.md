@@ -50,6 +50,12 @@ Items WITHOUT a password are encrypted with a shared keypair (the passphrase is 
 
 User accounts will also generate an encryption key, which will be shared among it's items.
 
+## Speed Notice
+
+GPG key generation is extremely slow at the moment, as it can take up to one minute. This is due to the fact that the hosted version of this app ([lmo.jneidel.com](https://lmo.jneidel.com) is running on my shared hosting server. GPG just does not have the processing power available to generate the key in a reasonable amount of time (on my local machine it takes less than a second).
+
+To reduce the amount of keys that will be generated I've removed the option to encrypt items anonymously (i.e. without a user account), but accounts can still be generated.
+
 ## Installation
 
 - Clone the repo

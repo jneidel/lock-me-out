@@ -24,11 +24,11 @@ block content
       input.first( type="text" name="user" value=`${userValue}` )
       a( href="/new-user" )
         button.second( form="none" ) New user
-    label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with (<a href="https://github.com/jneidel/lock-me-out#how-it-works">more info</a>)
+    //label( for="passphrase" ) <span class="required -warn">recommended</span> Passphrase to encrypt your item with (<a href="https://github.com/jneidel/lock-me-out#how-it-works">more info</a>)
     - const passphraseDisabled = userValue !== "";
-    if passphraseDisabled
+    //if passphraseDisabled
       input( type="password" name="passphrase" disabled placeholder="The users passphrase" )
-    else
+    //else
       input( type="password" name="passphrase" )
     button( type="submit" ) Submit item
 

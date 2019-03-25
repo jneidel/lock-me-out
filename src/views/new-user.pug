@@ -6,6 +6,7 @@ block styles
 block content
   h1 New user
   p Users collect items in one place
+  p Warning: GPG key generation is currently extremly slow, expect a waiting time of up to 1 minute! (<a href="https://github.com/jneidel/lock-me-out#speed-notice">more info</a>)
   form( method="post" action="/api/new-user" )
     label( for="username" ) <span class="required -error">required</span> Username
     - const userValue = user ? user : "";
