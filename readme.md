@@ -71,7 +71,7 @@ To reduce the amount of keys that will be generated I've removed the option to e
 
 GnuPG is required for the encryption of items.
 
-See [lock-me-out-cli](https://github.com/jneidel/lock-me-out-cli/blob/master/bin/install-gpg.sh) for a gpg install script.
+See my [dotfiles](https://github.com/jneidel/dotfiles/blob/master/compilation-scripts/install-gpg.sh) for a gpg install script.
 
 Once installed you can test if gpg is working as intended with: `npm run test gpg`
 
