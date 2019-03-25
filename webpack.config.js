@@ -1,9 +1,9 @@
 const path = require( "path" );
+const { ENVIRONMENT } = require( "./dist/util/secrets" );
+
 const { genScss, babel, polyfill, img } = require( "setup-webpack" );
 
-require( "dotenv" ).config( { path: "vars.env" } );
-
-const prod = process.env.NODE_ENV === "prododuction";
+const prod = ENVIRONMENT === "production";
 
 const config = [];
 
