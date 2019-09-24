@@ -5,7 +5,6 @@
 > Temporarily lock yourself out of a service by encrypting e.g. your netflix password for a week
 
 [![Github Release](https://img.shields.io/github/tag/jneidel/lock-me-out.svg?label=release&style=flat-square)](https://github.com/jneidel/lock-me-out/releases/latest)
-![Status WIP](https://img.shields.io/badge/status-work%20in%20progress-orange.svg?style=flat-square)
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://github.com/jneidel/lock-me-out/blob/master/license)
 
 Encrypt a string to make it inaccessible for a given amount of time.
